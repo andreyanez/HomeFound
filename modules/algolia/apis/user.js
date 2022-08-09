@@ -5,6 +5,16 @@ import { unWrap, getErrorResponse } from '../../../utils/fetching';
 export default algoliaConfig => {
 	const headers = getHeaders(algoliaConfig);
 	return {
+		//deleting home from user info
+		removeHome: async function (identity, homeId) {
+			// we fetch the user to update the data
+			const payload = (await this.getById(identity)).json;
+			// we filter the homes to exclude the deleted home
+			const homes = payload.homeId.filter(id => id != homeId);
+			payload.homeId = homes;
+			//this.create updates the user with the updated data
+			this.create(identity, payload);
+		},
 		//assigning home to user
 		assignHome: async function (identity, homeId) {
 			const payload = (await this.getById(identity)).json;

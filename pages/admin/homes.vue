@@ -1,7 +1,8 @@
 <template>
 	<div>
 		<span v-for="home in homeList" :key="home.objectID"
-			>{{ home.title }}: <button class="text-red-800">Delete</button><br />
+			>{{ home.title }}:
+			<button class="text-red-800" @click="deleteHome(home.objectID)">Delete</button><br />
 		</span>
 		<h2 class="text-xl bold">Add a Home</h2>
 		<form class="form" @submit.prevent="onSubmit">
@@ -47,7 +48,7 @@
 	</div>
 </template>
 <script>
-import { unWrap } from '~/utils/fetchUtils';
+import { unWrap } from '~/utils/fetching';
 export default {
 	data() {
 		return {
@@ -82,6 +83,14 @@ export default {
 		this.setHomesList();
 	},
 	methods: {
+		async deleteHome(homeId) {
+			await fetch(`/api/homes/${homeId}`, {
+				method: 'DELETE',
+			});
+			// removing the deleted home from the view
+			const index = this.homeList.findIndex(obj => obj.objectID == homeId);
+			this.homeList.splice(index, 1);
+		},
 		async setHomesList() {
 			this.homeList = (await unWrap(await fetch('/api/homes/user/'))).json;
 		},
@@ -107,12 +116,23 @@ export default {
 			this.home.images[index] = imageUrl;
 		},
 		async onSubmit() {
-			await fetch('/api/homes', {
-				method: 'POST',
-				body: JSON.stringify(this.home),
-				headers: {
-					'Content-Type': 'application/json',
-				},
+			// unwraping the response on a variable
+			//to be able to update the homeslist once a new
+			//home is added
+			const response = await unWrap(
+				await fetch('/api/homes', {
+					method: 'POST',
+					body: JSON.stringify(this.home),
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				})
+			);
+
+			this.homeList.push({
+				//title comes from the just added home form
+				title: this.home.title,
+				objectID: response.json.homeId,
 			});
 		},
 	},

@@ -13,12 +13,22 @@ export default apis => {
 			await createHome(req.identity, req.body, res);
 			return;
 		}
+		if (req.method == 'DELETE') {
+			const homeId = req.url.replace(/\//g, '');
+			return await deleteHome(req.identity, homeId, res);
+		}
 		rejectHitBadRequest(res);
 	};
 
 	async function getHomesByUser(userId, res) {
 		const payload = (await apis.homes.getByUserId(userId)).json.hits;
 		sendJSON(payload, res);
+	}
+
+	async function deleteHome(identity, homeId, res) {
+		// we wait for both calls to be done with Promise.all
+		await Promise.all([apis.homes.delete(homeId), apis.user.removeHome(identity, homeId)]);
+		sendJSON({}, res);
 	}
 
 	async function createHome(identity, body, res) {
@@ -37,6 +47,6 @@ export default apis => {
 		}
 		//assignin homes to user
 		await apis.user.assignHome(identity, homeId);
-		sendJSON({}, res);
+		sendJSON({ homeId }, res);
 	}
 };

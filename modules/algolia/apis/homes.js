@@ -27,18 +27,36 @@ export default algoliaConfig => {
 				return getErrorResponse(error);
 			}
 		},
+		delete: async homeId => {
+			try {
+				return unWrap(
+					await fetch(
+						`https://${algoliaConfig.algolia_app_id}-dsn.algolia.net/1/indexes/home/${homeId}`,
+						{
+							headers,
+							method: 'DELETE',
+						}
+					)
+				);
+			} catch (error) {
+				return getErrorResponse(error);
+			}
+		},
 		getByUserId: async userId => {
 			try {
 				return unWrap(
-					await fetch(`https://${algoliaConfig.appId}-dsn.algolia.net/1/indexes/home/query`, {
-						headers,
-						method: 'POST',
-						body: JSON.stringify({
-							filters: `userId:${userId}`,
-							attributesToRetrieve: ['objectID', 'title'],
-							attributesToHighlight: [],
-						}),
-					})
+					await fetch(
+						`https://${algoliaConfig.algolia_app_id}-dsn.algolia.net/1/indexes/home/query`,
+						{
+							headers,
+							method: 'POST',
+							body: JSON.stringify({
+								filters: `userId:${userId}`,
+								attributesToRetrieve: ['objectID', 'title'],
+								attributesToHighlight: [],
+							}),
+						}
+					)
 				);
 			} catch (error) {
 				return getErrorResponse(error);
