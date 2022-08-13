@@ -13,4 +13,7 @@ export default {
 	router: {
 		prefetchLinks: false,
 	},
+	build: {
+		postcss: null,
+	},
 };
