@@ -27,6 +27,8 @@ export default apis => {
 			res.end();
 			return;
 		}
+		//assignin homes to user
+		await apis.user.assignHome(identity, homeId);
 		sendJSON({}, res);
 	}
 };
