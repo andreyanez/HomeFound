@@ -1,6 +1,8 @@
 <template>
 	<div>
-		[LIST OF HOMES HERE]
+		<span v-for="home in homeList" :key="home.objectID"
+			>{{ home.title }}: <button class="text-red-800">Delete</button><br />
+		</span>
 		<h2 class="text-xl bold">Add a Home</h2>
 		<form class="form" @submit.prevent="onSubmit">
 			Images:<br />
@@ -45,9 +47,11 @@
 	</div>
 </template>
 <script>
+import { unWrap } from '~/utils/fetchUtils';
 export default {
 	data() {
 		return {
+			homeList: [],
 			home: {
 				title: '',
 				description: '',
@@ -75,8 +79,12 @@ export default {
 	},
 	mounted() {
 		this.$maps.makeAutoComplete(this.$refs.locationSelector, ['address']);
+		this.setHomesList();
 	},
 	methods: {
+		async setHomesList() {
+			this.homeList = (await unWrap(await fetch('/api/homes/user/'))).json;
+		},
 		changed(event) {
 			const addressParts = event.detail.address_components;
 			const street = this.getAddressPart(addressParts, 'street_number')?.short_name || '';
