@@ -1,4 +1,4 @@
-export { default as HomeCard } from '../..\\components\\HomeCard.vue'
+export { default as HomeCard } from '../../components/HomeCard.vue'
 
 // nuxt/nuxt.js#8607
 function wrapFunctional(options) {

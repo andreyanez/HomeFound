@@ -2,15 +2,13 @@
   {
     "name": "home-id",
     "path": "/home/:id?",
-    "component": "X:\\\\Dev\\\\airbnb_clone\\\\pages\\\\home\\\\_id.vue",
-    "chunkName": "pages/home/_id",
-    "_name": "_527fa6d4"
+    "component": "/mnt/x/Dev/airbnb_clone/pages/home/_id.vue",
+    "chunkName": "pages/home/_id"
   },
   {
     "name": "index",
     "path": "/",
-    "component": "X:\\\\Dev\\\\airbnb_clone\\\\pages\\\\index.vue",
-    "chunkName": "pages/index",
-    "_name": "_907952a6"
+    "component": "/mnt/x/Dev/airbnb_clone/pages/index.vue",
+    "chunkName": "pages/index"
   }
 ]
