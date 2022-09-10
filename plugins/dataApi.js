@@ -1,6 +1,6 @@
 export default function (context, inject) {
-	const appId = 'RC6C4AMIAL';
-	const apiKey = 'f1f432a12c7e98f2c82ceb925b122bd0';
+	const appId = process.env.algolia_app_id
+	const apiKey = process.env.algolia_search_api;
 
 	inject('dataApi', {
 		getHome,
