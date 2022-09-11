@@ -1,6 +1,6 @@
 export default function (context, inject) {
-	let mapLoaded = false;
-	let mapWaiting = null;
+	let isLoaded = false;
+	let waiting = [];
 
 	//first it will run the addScript function,
 	// to not expose all the functions on this plugin
@@ -9,6 +9,7 @@ export default function (context, inject) {
 	addScript();
 	inject('maps', {
 		showMap,
+		makeAutoComplete,
 	});
 
 	/*
@@ -17,58 +18,73 @@ export default function (context, inject) {
         the scripts[] adds scripts on the head tag
         here we do the same
 
-        we also create the initMap window property
+        we also create the initGoogleMaps window property
         it will be used to link it to the callback fucntion that
         google fires when the script has finished loading
     */
 	function addScript() {
 		const script = document.createElement('script');
-		script.src =
-			`https://maps.googleapis.com/maps/api/js?key=${process.env.maps_api}&libraries=places&callback=initMap`;
+		script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.maps_api}&libraries=places&callback=initGoogleMaps`;
 		script.async = true;
-		window.initMap = initMap;
+		window.initGoogleMaps = initGoogleMaps;
 		document.head.appendChild(script);
 	}
 
 	/*
-        the initMap function called from the google script
+        the initGoogleMaps function called from the google script
         gets linked to this function, which sets the
-        mapLoaded variable to true.
+        isLoaded variable to true.
 
-        If the maps script wasn't done loading when calling showMap(), it
-        stored the arguments in the mapWaiting variable
-        and now it will use those arguments to render the map
-        with the renderMap function, and reseting the value of
-        mapWaiting to null.
+		when initGoogleMaps is loaded, it means that the google library has done
+		loading, and calls initGoogleMaps, as the callback.
+
+		So basically, everything that is ran in initGoogleMaps runs when the 
+		script has called the necessary scripts successfully 
+
+		Now, initGoogleMaps will change the isLoaded value to true
+		and I use a forEach array method to find each function whose arguments
+		where stored on the waiting Array, check if they are of type 'fuction'
+		and run those functions with their respective arguments
+
     */
-	function initMap() {
-		mapLoaded = true;
-		if (mapWaiting) {
-			const { canvas, lat, lng } = mapWaiting;
-			renderMap(canvas, lat, lng);
-			mapWaiting = null;
+	function initGoogleMaps() {
+		isLoaded = true;
+		waiting.forEach(item => {
+			typeof item.fn === 'function' && item.fn(...item.arguments);
+		});
+		waiting = [];
+	}
+
+	function makeAutoComplete(input) {
+		if (!isLoaded) {
+			waiting.push({ fn: makeAutoComplete, arguments });
+			return;
 		}
+		const autoCompleteInstance = new window.google.maps.places.Autocomplete(input, {
+			types: ['(cities'],
+		});
 	}
 
 	/*
         This is the function that will be used in the components
         it will first check if the map has loaded using the
-        mapLoaded variable, then it will call the renderMap function
-        with the arguments from the component
+        isLoaded variable, then it will render the map on the dom
 
-        Else, if its now loaded yet, it will store the arguments
-        inside the mapWaiting variable
+        Else, if its not loaded yet, the arguments will be stored
+		within the waiting array as an object, adding the showMap
+		function as another property 
     */
 	function showMap(canvas, lat, lng) {
-		if (mapLoaded) renderMap(canvas, lat, lng);
-		else mapWaiting = { canvas, lat, lng };
-	}
-
-	// this functios just uses the google window properties to
-	// create a map based on the arguments sent from showMap
-	// and renders the map.
-	function renderMap(canvas, lat, lng) {
-		console.log('mounted');
+		if (!isLoaded) {
+			waiting.push({
+				fn: showMap,
+				arguments,
+			});
+			return;
+		}
+		// Here I use the google window properties to
+		// create a map based on the arguments sent from showMap
+		// and renders the map.
 		const mapOptions = {
 			zoom: 18,
 			center: new window.google.maps.LatLng(lat, lng),
