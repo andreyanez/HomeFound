@@ -19,10 +19,14 @@
 			{{formatDate(review.date)}}
 			<short-text :text="review.comment" :target="150"/>
 		</div>
+		<img :src="user.image"/>
+		{{user.name}}
+		{{formatDate(user.joined)}}
+		{{user.reviewCount}}
+		{{user.description}}
 	</div>
 </template>
 <script>
-// import homes from '~/data/homes';
 export default {
 	head() {
 		return {
@@ -35,18 +39,25 @@ export default {
 		this.$maps.showMap(this.$refs.map, this.home._geoloc.lat, this.home._geoloc.lng);
 	},
 	async asyncData({ params, $dataApi, error }) {
-		const homeResponse = await $dataApi.getHome(params.id);
-		//Here, we check if the status response has been successful (ok response should be true)
-		//in case it isn't, i throw the status and statusText properties from the response
-		//to the error function, which triggers Nuxt's error page and accepts an error string or object
-		if (!homeResponse.ok) return error({statusCode: homeResponse.status, message: homeResponse.statusText})
 
-		const reviewResponse = await $dataApi.getReviewsByHomeId(params.id)
-		if (!reviewResponse.ok) return error({statusCode: reviewResponse.status, message: reviewResponse.statusText})
+		//I changed the behavior of the data fetching due to unneccesary blocking with each call
+		//now all api calls will run at the same time
+		const responses = await Promise.all([
+			$dataApi.getHome(params.id),
+			$dataApi.getReviewsByHomeId(params.id),
+			$dataApi.getUserByHomeId(params.id)
+		])
+
+		//if there's a bad response, a object is created and it will be used to send the error 
+		//function, which triggers Nuxt's error page and accepts an error string or object
+		const badResponse = responses.find((response)=> !response.ok)
+		if (badResponse) return error({statusCode: badResponse.status, message: badResponse.statusText})
+
 
 		return {
-			home: homeResponse.json,
-			reviews: reviewResponse.json.hits
+			home: responses[0].json,
+			reviews: responses[1].json.hits,
+			user: responses[2].json.hits[0]
 		};
 	},
 	methods:{

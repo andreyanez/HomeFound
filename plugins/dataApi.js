@@ -8,7 +8,8 @@ export default function (context, inject) {
 	}
 	inject('dataApi', {
 		getHome,
-		getReviewsByHomeId
+		getReviewsByHomeId,
+		getUserByHomeId
 	});
 
 	async function getHome(homeId) {
@@ -29,6 +30,25 @@ export default function (context, inject) {
 						body: JSON.stringify({
 							filters: `homeId:${homeId}`,
 							hitsPerPage: 6,
+							attributesToHighlight: []
+						})
+					}
+				)
+			)
+		} catch (error) {
+			return getErrorResponse(error)
+		}
+	}
+
+	async function getUserByHomeId(homeId){
+		try {
+			return unWrap(
+				await fetch(
+					`${ALGOLIA_URL}/users/query`,{
+						headers,
+						method: 'POST',
+						body: JSON.stringify({
+							filters: `homeId:${homeId}`,
 							attributesToHighlight: []
 						})
 					}
