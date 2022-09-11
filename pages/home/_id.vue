@@ -15,6 +15,9 @@
 			{{ home.bathrooms }} bath<br />
 		</div>
 		<div style="height: 800px; width: 800px" ref="map"></div>
+		<div v-for="review in reviews" :key="review.objectID">
+			{{review.date}}
+		</div>
 	</div>
 </template>
 <script>
@@ -31,13 +34,18 @@ export default {
 		this.$maps.showMap(this.$refs.map, this.home._geoloc.lat, this.home._geoloc.lng);
 	},
 	async asyncData({ params, $dataApi, error }) {
-		const response = await $dataApi.getHome(params.id);
+		const homeResponse = await $dataApi.getHome(params.id);
 		//Here, we check if the status response has been successful (ok response should be true)
 		//in case it isn't, i throw the status and statusText properties from the response
 		//to the error function, which triggers Nuxt's error page and accepts an error string or object
-		if (!response.ok) return error({statusCode: response.status, message: statusText})
+		if (!homeResponse.ok) return error({statusCode: homeResponse.status, message: homeResponse.statusText})
+
+		const reviewResponse = await $dataApi.getReviewsByHomeId(params.id)
+		if (!reviewResponse.ok) return error({statusCode: reviewResponse.status, message: reviewResponse.statusText})
+
 		return {
-			home: response.json,
+			home: homeResponse.json,
+			reviews: reviewResponse.json.hits
 		};
 	},
 };
