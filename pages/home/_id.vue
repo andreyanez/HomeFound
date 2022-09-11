@@ -25,23 +25,19 @@ export default {
 			title: this.home.title,
 		};
 	},
-	// data() {
-	// 	return {
-	// 		home: {},
-	// 	};
-	// },
 	mounted() {
 		// we are now calling the whole 3rd party map script callign the injection name with a $ sign,
 		// and calling the showMap function,sendind the map html element and the geo parameters
 		this.$maps.showMap(this.$refs.map, this.home._geoloc.lat, this.home._geoloc.lng);
 	},
-	async asyncData({ params, $dataApi }) {
-		// const home = homes.find(home => home.objectID == this.$route.params.id);
-		const home = await $dataApi.getHome(params.id);
-		// console.log(homeData);
-		// this.home = home;
+	async asyncData({ params, $dataApi, error }) {
+		const response = await $dataApi.getHome(params.id);
+		//Here, we check if the status response has been successful (ok response should be true)
+		//in case it isn't, i throw the status and statusText properties from the response
+		//to the error function, which triggers Nuxt's error page and accepts an error string or object
+		if (!response.ok) return error({statusCode: response.status, message: statusText})
 		return {
-			home,
+			home: response.json,
 		};
 	},
 };

@@ -200,7 +200,7 @@ export async function setContext (app, context) {
       payload: context.payload,
       error: context.error,
       base: app.router.options.base,
-      env: {"maps_api":"AIzaSyB0mLe8UU8lZG23ags6WL87LWN6NpK5-T0","algolia_search_api":"f1f432a12c7e98f2c82ceb925b122bd0","algolia_app_id":"RC6C4AMIAL"}
+      env: {"maps_api":"AIzaSyAC8bw3BsxjJtX5QmX-UJP-vDw9CRIAPaI","algolia_search_api":"229f312f157e50412fb7599f11a93468","algolia_app_id":"RC6C4AMIAL"}
     }
     // Only set once
 

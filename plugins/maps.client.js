@@ -1,4 +1,4 @@
-export default function (context, inject, config) {
+export default function (context, inject) {
 	let mapLoaded = false;
 	let mapWaiting = null;
 
