@@ -16,7 +16,8 @@
 		</div>
 		<div style="height: 800px; width: 800px" ref="map"></div>
 		<div v-for="review in reviews" :key="review.objectID">
-			{{review.date}}
+			{{formatDate(review.date)}}
+			<short-text :text="review.comment" :target="150"/>
 		</div>
 	</div>
 </template>
@@ -48,5 +49,11 @@ export default {
 			reviews: reviewResponse.json.hits
 		};
 	},
+	methods:{
+		formatDate(dateString){
+			const date = new Date(dateString)
+			return date.toLocaleDateString()
+		}
+	}
 };
 </script>
