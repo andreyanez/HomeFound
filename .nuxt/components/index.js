@@ -1,5 +1,6 @@
-export { default as HomeCard } from '../..\\components\\HomeCard.vue'
-export { default as ShortText } from '../..\\components\\ShortText.vue'
+export { default as HomeCard } from '../../components/HomeCard.vue'
+export { default as HomeRow } from '../../components/HomeRow.vue'
+export { default as ShortText } from '../../components/ShortText.vue'
 
 // nuxt/nuxt.js#8607
 function wrapFunctional(options) {

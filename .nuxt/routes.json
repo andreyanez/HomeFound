@@ -2,22 +2,19 @@
   {
     "name": "search",
     "path": "/search",
-    "component": "C:\\\\Dev\\\\airbnb_clone\\\\pages\\\\search.vue",
-    "chunkName": "pages/search",
-    "_name": "_721cd3dc"
+    "component": "/mnt/x/Dev/airbnb_clone/pages/search.vue",
+    "chunkName": "pages/search"
   },
   {
     "name": "home-id",
     "path": "/home/:id?",
-    "component": "C:\\\\Dev\\\\airbnb_clone\\\\pages\\\\home\\\\_id.vue",
-    "chunkName": "pages/home/_id",
-    "_name": "_086216c1"
+    "component": "/mnt/x/Dev/airbnb_clone/pages/home/_id.vue",
+    "chunkName": "pages/home/_id"
   },
   {
     "name": "index",
     "path": "/",
-    "component": "C:\\\\Dev\\\\airbnb_clone\\\\pages\\\\index.vue",
-    "chunkName": "pages/index",
-    "_name": "_3aaf0e58"
+    "component": "/mnt/x/Dev/airbnb_clone/pages/index.vue",
+    "chunkName": "pages/index"
   }
 ]
