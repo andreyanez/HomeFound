@@ -1,5 +1,12 @@
 [
   {
+    "name": "search",
+    "path": "/search",
+    "component": "C:\\\\Dev\\\\airbnb_clone\\\\pages\\\\search.vue",
+    "chunkName": "pages/search",
+    "_name": "_721cd3dc"
+  },
+  {
     "name": "home-id",
     "path": "/home/:id?",
     "component": "C:\\\\Dev\\\\airbnb_clone\\\\pages\\\\home\\\\_id.vue",
