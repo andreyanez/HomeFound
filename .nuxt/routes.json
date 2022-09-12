@@ -3,18 +3,21 @@
     "name": "search",
     "path": "/search",
     "component": "/mnt/x/Dev/airbnb_clone/pages/search.vue",
-    "chunkName": "pages/search"
+    "chunkName": "pages/search",
+    "_name": "_036d08ca"
   },
   {
     "name": "home-id",
     "path": "/home/:id?",
     "component": "/mnt/x/Dev/airbnb_clone/pages/home/_id.vue",
-    "chunkName": "pages/home/_id"
+    "chunkName": "pages/home/_id",
+    "_name": "_9b64b7a8"
   },
   {
     "name": "index",
     "path": "/",
     "component": "/mnt/x/Dev/airbnb_clone/pages/index.vue",
-    "chunkName": "pages/index"
+    "chunkName": "pages/index",
+    "_name": "_2c1e64a0"
   }
 ]
