@@ -6,6 +6,20 @@ export default algoliaConfig => {
 	const headers = getHeaders(algoliaConfig);
 	return {
 		create: async (homeId, payload) => {
+			// here before we try to send the data to algolia
+			// we transform the data send by the date picker to EPOCH
+			//this is because algolia works with EPOCH
+			const availability = [];
+			payload.availabilityRanges.forEach(range => {
+				const start = new Date(range.start).getTime() / 1000;
+				const end = new Date(range.end).getTime() / 1000;
+				for (var day = start; day <= end; day += 86400) {
+					availability.push(day);
+				}
+			});
+
+			delete payload.availabilityRanges;
+			payload.availability = availability;
 			try {
 				return unWrap(
 					//Auth flow part 5: the create user function
