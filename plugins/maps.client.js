@@ -55,14 +55,12 @@ export default function (context, inject) {
 		waiting = [];
 	}
 
-	function makeAutoComplete(input) {
+	function makeAutoComplete(input, types = ['(cities)']) {
 		if (!isLoaded) {
 			waiting.push({ fn: makeAutoComplete, arguments });
 			return;
 		}
-		const autoCompleteInstance = new google.maps.places.Autocomplete(input, {
-			types: ['(cities)'],
-		});
+		const autoCompleteInstance = new window.google.maps.places.Autocomplete(input, { types });
 		//here, we create a listener to the maps event 'place changed'
 		//when the event fires, it wil return the data of the place
 		//we create a custom event and send the proper data to the header
