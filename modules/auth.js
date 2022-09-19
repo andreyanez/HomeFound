@@ -19,16 +19,12 @@ export default function () {
 		//if the handler doesn't find any cookie stored, it will fire the rejectHit function
 		if (!idToken) return rejectHit(res);
 
-		// console.log(req.originalUrl);
-		// console.log(idToken);
-
 		//IG there's a token, we will fire the getUser function
 		//which usese the google auth library to verify the token
 		const ticket = await getUser(idToken);
 		//if the token wasn't vaild it won't return anything,
 		//so we'll fire rejectHit again.
 		if (!ticket) return rejectHit(res);
-		console.log(ticket);
 		//else, we'll add a object to the request
 		//with basic data coming from the ticket
 		req.identity = {

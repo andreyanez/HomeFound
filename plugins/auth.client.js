@@ -1,5 +1,5 @@
 import Cookie from 'js-cookie';
-
+import { unWrap } from '~/utils/fetching';
 export default ({ $config, store }, inject) => {
 	//learned that all plugins created run each time the server runs, lol
 
@@ -32,23 +32,37 @@ export default ({ $config, store }, inject) => {
 		});
 	}
 
-	function parseUser(user) {
-		const profile = user.getBasicProfile();
-
+	async function parseUser(user) {
 		if (!user.isSignedIn()) {
 			Cookie.remove($config.auth.cookieName);
 			store.commit('auth/user', null);
 			return;
 		}
 
-		//using vuex to add user data to global state
-		store.commit('auth/user', {
-			fullName: profile.getName(),
-			profileUrl: profile.getImageUrl(),
-		});
-
 		const idToken = user.getAuthResponse().id_token;
 		Cookie.set($config.auth.cookieName, idToken, { expires: 1 / 24, sameSite: 'Lax' });
+
+		try {
+			//The new auth flow gives an extra layer of security
+			//after google log in, it will hit an endpoint
+			//which will authenticate the user, and save it to the database
+
+			// Auth flow part 1: using fetch to call to a api endpoint
+			// i use await twice, once to fetch the response from the api
+			//and the other to unwrap the response
+			const response = await unWrap(await fetch('/api/user'));
+			// I store the json response on a constant
+			const user = response.json;
+
+			//then I use the data from the constant to
+			//commit and save to global state
+			store.commit('auth/user', {
+				fullName: user.name,
+				profileUrl: user.image,
+			});
+		} catch (error) {
+			console.error(error);
+		}
 	}
 
 	function signOut() {

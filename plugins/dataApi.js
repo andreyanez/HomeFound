@@ -1,6 +1,8 @@
-export default function (context, inject) {
-	const appId = context.$config.algolia_app_id;
-	const apiKey = context.$config.algolia_search_api;
+import { unWrap, getErrorResponse } from '~/utils/fetching';
+
+export default function ({ $config }, inject) {
+	const appId = $config.algolia.algolia_app_id;
+	const apiKey = $config.algolia.algolia_search_key;
 	const ALGOLIA_URL = `https://${appId}-dsn.algolia.net/1/indexes`;
 	const headers = {
 		'X-Algolia-API-Key': apiKey,
@@ -74,27 +76,4 @@ export default function (context, inject) {
 			return getErrorResponse(error);
 		}
 	}
-
-	//Here, I made an unwrap function to get only the desired
-	//data from the api call
-	const unWrap = async response => {
-		const json = await response.json();
-		const { ok, status, statusText } = response;
-		return {
-			json,
-			ok,
-			status,
-			statusText,
-		};
-	};
-
-	//This function gets called when there is an error
-	//when trying to make an api call
-	const getErrorResponse = error => {
-		return {
-			ok: false,
-			status: 500,
-			statusText: error.message,
-		};
-	};
 }

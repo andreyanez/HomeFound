@@ -16,7 +16,7 @@ export default {
 	//the new 'map' plugin is created with the name of
 	//maps.client.js because nuxt will use it only on the client
 	plugins: ['~/plugins/maps.client', '~/plugins/auth.client', '~/plugins/dataApi'],
-	modules: ['~/modules/auth'],
+	modules: ['~/modules/auth', '~/modules/algolia'],
 	devServerHandlers: [],
 	buildModules: ['@nuxtjs/tailwindcss'],
 	css: ['~/assets/sass/app.scss'],
@@ -31,12 +31,20 @@ export default {
 	// Environment variables
 	//env variables now stored on nuxt's runtime config
 	publicRuntimeConfig: {
-		algolia_search_api: process.env.ALGOLIA_SEARCH_KEY,
-		algolia_app_id: process.env.ALGOLIA_APP_ID,
+		algolia: {
+			algolia_app_id: process.env.ALGOLIA_APP_ID,
+			algolia_search_key: process.env.ALGOLIA_SEARCH_KEY,
+		},
 		maps_api_key: process.env.MAPS_API_KEY,
 		auth: {
 			cookieName: 'idToken',
 			clientId: process.env.GOOGLE_AUTH_ID,
+		},
+	},
+	privateRuntimeConfig: {
+		algolia: {
+			algolia_app_id: process.env.ALGOLIA_APP_ID,
+			algolia_api_key: process.env.ALGOLIA_API_KEY,
 		},
 	},
 };
