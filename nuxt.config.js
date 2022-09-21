@@ -20,8 +20,13 @@ export default {
 	cloudinary: {
 		cloudName: 'simuniver',
 	},
+	image: {
+		cloudinary: {
+			baseURL: 'https://res.cloudinary.com/simuniver/image/upload/',
+		},
+	},
 	devServerHandlers: [],
-	buildModules: ['@nuxtjs/tailwindcss'],
+	buildModules: ['@nuxtjs/tailwindcss', '@nuxt/image'],
 	css: ['~/assets/sass/app.scss'],
 	build: {
 		//remove inline styles and

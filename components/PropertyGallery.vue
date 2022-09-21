@@ -2,7 +2,11 @@
 	<div class="app-section">
 		<div class="app-wrapper">
 			<div class="app-masonry">
-				<div v-for="image in images" :key="image" :style="`background-image: url(${image})`"></div>
+				<div
+					v-for="public_id in images"
+					:key="public_id"
+					:style="`background-image: url(${getImageUrl(public_id)})`"
+				></div>
 			</div>
 		</div>
 	</div>
@@ -12,7 +16,20 @@ export default {
 	props: {
 		images: {
 			type: Array,
-			requierd: true,
+			required: true,
+		},
+	},
+	methods: {
+		getImageUrl(public_id) {
+			return this.$img(
+				public_id,
+				{
+					width: 600,
+				},
+				{
+					provider: 'cloudinary',
+				}
+			);
 		},
 	},
 };

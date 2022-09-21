@@ -20,6 +20,7 @@
 	"author": "Andre Yanez",
 	"license": "ISC",
 	"devDependencies": {
+		"@nuxt/image": "^0.7.1",
 		"@nuxtjs/tailwindcss": "^5.0.2",
 		"sass": "^1.54.9",
 		"sass-loader": "^10.3.1",
