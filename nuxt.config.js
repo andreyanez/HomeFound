@@ -16,7 +16,10 @@ export default {
 	//the new 'map' plugin is created with the name of
 	//maps.client.js because nuxt will use it only on the client
 	plugins: ['~/plugins/maps.client', '~/plugins/auth2.client', '~/plugins/dataApi'],
-	modules: ['~/modules/auth', '~/modules/algolia'],
+	modules: ['~/modules/auth', '~/modules/algolia', '~/modules/cloudinary', '@nuxtjs/cloudinary'],
+	cloudinary: {
+		cloudName: 'simuniver',
+	},
 	devServerHandlers: [],
 	buildModules: ['@nuxtjs/tailwindcss'],
 	css: ['~/assets/sass/app.scss'],
@@ -40,11 +43,17 @@ export default {
 			cookieName: 'idToken',
 			clientId: process.env.GOOGLE_AUTH_ID,
 		},
+		cloudinary: {
+			apiKey: process.env.CLOUDINARY_API_KEY,
+		},
 	},
 	privateRuntimeConfig: {
 		algolia: {
 			algolia_app_id: process.env.ALGOLIA_APP_ID,
 			algolia_api_key: process.env.ALGOLIA_API_KEY,
+		},
+		cloudinary: {
+			apiSecret: process.env.CLOUDINARY_API_SECRET,
 		},
 	},
 };
