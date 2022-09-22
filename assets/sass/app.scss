@@ -109,10 +109,16 @@ $cities: paris, new-york, london, dubai, san-francisco, cancun;
 
 	&-hero {
 		background-image: url(/images/photos/beach.jpg);
-		@apply h-148 bg-cover rounded-3xl flex items-end justify-center pb-12;
+		@apply flex-col h-148 bg-cover rounded-3xl flex items-center justify-center pb-12;
 
 		> h2 {
-			@apply text-white font-medium text-3xl;
+			@apply text-white font-medium text-5xl;
+		}
+		> h3 {
+			@apply text-white font-medium text-lg mt-10;
+			a {
+				@apply text-blue-600;
+			}
 		}
 	}
 
@@ -401,7 +407,7 @@ $cities: paris, new-york, london, dubai, san-francisco, cancun;
 
 	&-search-results-page {
 		@apply flex flex-col;
-		height: 85vh;
+		height: auto;
 	}
 
 	&-search-results {
