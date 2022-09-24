@@ -16,7 +16,7 @@ export default {
 	//the new 'map' plugin is created with the name of
 	//maps.client.js because nuxt will use it only on the client
 	plugins: ['~/plugins/maps.client', '~/plugins/auth.client', '~/plugins/dataApi'],
-
+	modules: ['~/modules/auth'],
 	devServerHandlers: [],
 	buildModules: ['@nuxtjs/tailwindcss'],
 	css: ['~/assets/sass/app.scss'],

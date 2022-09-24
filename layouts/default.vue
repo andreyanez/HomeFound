@@ -14,7 +14,7 @@
 				<template v-if="isLoggedIn">
 					<img src="/images/icons/house.svg" />
 					<div class="name">Host</div>
-					<img :src="user.profileUrl" :alt="user.fullName" class="avatar" />
+					<img :src="user.profileUrl" class="avatar" />
 				</template>
 				<div v-show="!isLoggedIn" id="googleButton" class="ml-8"></div>
 			</div>
