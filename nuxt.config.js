@@ -29,9 +29,10 @@ export default {
 		},
 	},
 	// Environment variables
-	env: {
-		maps_api: process.env.MAPS_API_KEY,
+	//env variables now stored on nuxt's runtime config
+	publicRuntimeConfig: {
 		algolia_search_api: process.env.ALGOLIA_SEARCH_KEY,
 		algolia_app_id: process.env.ALGOLIA_APP_ID,
+		maps_api_key: process.env.MAPS_API_KEY,
 	},
 };
