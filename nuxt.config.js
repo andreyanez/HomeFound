@@ -15,7 +15,7 @@ export default {
 	},
 	//the new 'map' plugin is created with the name of
 	//maps.client.js because nuxt will use it only on the client
-	plugins: ['~/plugins/maps.client', '~/plugins/dataApi'],
+	plugins: ['~/plugins/maps.client', '~/plugins/auth.client', '~/plugins/dataApi'],
 
 	devServerHandlers: [],
 	buildModules: ['@nuxtjs/tailwindcss'],
@@ -34,5 +34,9 @@ export default {
 		algolia_search_api: process.env.ALGOLIA_SEARCH_KEY,
 		algolia_app_id: process.env.ALGOLIA_APP_ID,
 		maps_api_key: process.env.MAPS_API_KEY,
+		auth: {
+			cookieName: 'idToken',
+			clientId: process.env.GOOGLE_AUTH_ID,
+		},
 	},
 };

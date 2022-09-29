@@ -6,6 +6,7 @@ export default function (context, inject) {
 	// to not expose all the functions on this plugin
 	// we use inject to set the name of the plugin when its used
 	// and what function we want to have available when called.
+	window.initGoogleMaps = initGoogleMaps;
 	addScript();
 	inject('maps', {
 		showMap,
@@ -26,7 +27,6 @@ export default function (context, inject) {
 		const script = document.createElement('script');
 		script.src = `https://maps.googleapis.com/maps/api/js?key=${context.$config.maps_api_key}&libraries=places&callback=initGoogleMaps`;
 		script.async = true;
-		window.initGoogleMaps = initGoogleMaps;
 		document.head.appendChild(script);
 	}
 
