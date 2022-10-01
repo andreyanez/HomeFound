@@ -1,6 +1,6 @@
 import Cookie from 'js-cookie';
 
-export default ({ $config }, inject) => {
+export default ({ $config, store }, inject) => {
 	//learned that all plugins created run each time the server runs, lol
 
 	//so NOW we create a new window object that calls the init function
@@ -34,13 +34,18 @@ export default ({ $config }, inject) => {
 
 	function parseUser(user) {
 		const profile = user.getBasicProfile();
-		console.log('Name:' + profile.getName());
-		console.log('Image Url:' + profile.getImageUrl());
 
 		if (!user.isSignedIn()) {
 			Cookie.remove($config.auth.cookieName);
+			store.commit('auth/user', null);
 			return;
 		}
+
+		//using vuex to add user data to global state
+		store.commit('auth/user', {
+			fullName: profile.getName(),
+			profileUrl: profile.getImageUrl(),
+		});
 
 		const idToken = user.getAuthResponse().id_token;
 		Cookie.set($config.auth.cookieName, idToken, { expires: 1 / 24, sameSite: 'Lax' });
