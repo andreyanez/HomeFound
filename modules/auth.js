@@ -11,6 +11,13 @@ export default function () {
 		app.use('/api', handler);
 	});
 
+	this.nuxt.hook('render:setupMiddleware', app => {
+		app.use('/admin', (req, res, next) => {
+			res.spa = true;
+			next();
+		});
+	});
+
 	//this handler function finds the cookie and parses it
 	//using the cookie library
 

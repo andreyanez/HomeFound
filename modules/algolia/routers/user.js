@@ -1,24 +1,11 @@
 import fetch from 'node-fetch';
-import { unWrap, getErrorResponse } from '../utils/fetching';
-
-export default function () {
-	//instance of the algolia private config
-	const algoliaConfig = this.options.privateRuntimeConfig.algolia;
-	const headers = {
-		'X-Algolia-API-Key': algoliaConfig.algolia_api_key,
-		'X-Algolia-Application-Id': algoliaConfig.algolia_app_id,
-	};
-
-	//Auth flow part 2: setting the route to hit and the function that will
-	//fire when its hit
-	this.nuxt.hook('render:setupMiddleware', app => {
-		app.use('/api/user', getUserRoute);
-	});
-
+import { unWrap, getErrorResponse } from '../../../utils/fetching';
+import { sendJSON } from '../helpers';
+export default headers => {
 	//Auth flow part 3: The getUserRoute function
 	//gets the request which has the data sent from
 	//the auth module (/api)
-	async function getUserRoute(req, res, next) {
+	return async function getUserRoute(req, res, next) {
 		const identity = req.identity;
 		//auth flow part 4: we check if the data sent
 		//exists within the database
@@ -42,7 +29,7 @@ export default function () {
 		// BEFORE THE DATA IS SUCCESSFULY STORED ON ALGOLIA
 		//BEFORE RETURNING THE DATA TO THE CLIENT
 		sendJSON(makeUserPayload(identity), res);
-	}
+	};
 
 	async function createUser(identity) {
 		try {
@@ -83,14 +70,6 @@ export default function () {
 		}
 	}
 
-	//sendJSON sets the response headers to json,
-	// stringifies the data sent
-	// and sends the response with the data
-	function sendJSON(data, res) {
-		res.setHeader('Content-Type', 'application/json');
-		res.end(JSON.stringify(data));
-	}
-
 	//makeUserPayload returns an object
 	//with Algolia's user sturcture,
 	//so algolia will accept it
@@ -105,4 +84,4 @@ export default function () {
 			joined: new Date().toISOString(),
 		};
 	}
-}
+};
