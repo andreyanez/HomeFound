@@ -25,7 +25,6 @@ export default function () {
 		const idToken = cookie.parse(req.headers.cookie)[authConfig.cookieName];
 		//if the handler doesn't find any cookie stored, it will fire the rejectHit function
 		if (!idToken) return rejectHit(res);
-
 		//IG there's a token, we will fire the getUser function
 		//which usese the google auth library to verify the token
 		const ticket = await getUser(idToken);

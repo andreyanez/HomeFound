@@ -1,7 +1,7 @@
 export function getHeaders(algoliaConfig) {
 	return {
-		'X-Algolia-API-Key': algoliaConfig.key,
-		'X-Algolia-Application-Id': algoliaConfig.appId,
+		'X-Algolia-API-Key': algoliaConfig.algolia_api_key,
+		'X-Algolia-Application-Id': algoliaConfig.algolia_app_id,
 	};
 }
 
