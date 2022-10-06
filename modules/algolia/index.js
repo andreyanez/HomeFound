@@ -1,3 +1,4 @@
+import bodyParser from 'body-parser';
 import getApis from './apis';
 import userRouter from './routers/user';
 export default function () {
@@ -8,6 +9,7 @@ export default function () {
 	//Auth flow part 2: setting the route to hit and the function that will
 	//fire when its hit
 	this.nuxt.hook('render:setupMiddleware', app => {
+		app.use(bodyParser.urlencoded());
 		app.use('/api/user', userRouter(apis));
 	});
 }
