@@ -4,12 +4,12 @@ import { normalizeURL, decode } from 'ufo'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _6c1e6255 = () => interopDefault(import('..\\pages\\admin.vue' /* webpackChunkName: "pages/admin" */))
-const _8e5813a2 = () => interopDefault(import('..\\pages\\admin\\homes.vue' /* webpackChunkName: "pages/admin/homes" */))
-const _6d1b7314 = () => interopDefault(import('..\\pages\\no-access.vue' /* webpackChunkName: "pages/no-access" */))
-const _721cd3dc = () => interopDefault(import('..\\pages\\search.vue' /* webpackChunkName: "pages/search" */))
-const _086216c1 = () => interopDefault(import('..\\pages\\home\\_id.vue' /* webpackChunkName: "pages/home/_id" */))
-const _3aaf0e58 = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
+const _5d8db89d = () => interopDefault(import('../pages/admin.vue' /* webpackChunkName: "pages/admin" */))
+const _225e19fc = () => interopDefault(import('../pages/admin/homes.vue' /* webpackChunkName: "pages/admin/homes" */))
+const _2b3d38be = () => interopDefault(import('../pages/no-access.vue' /* webpackChunkName: "pages/no-access" */))
+const _036d08ca = () => interopDefault(import('../pages/search.vue' /* webpackChunkName: "pages/search" */))
+const _9b64b7a8 = () => interopDefault(import('../pages/home/_id.vue' /* webpackChunkName: "pages/home/_id" */))
+const _2c1e64a0 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
 
@@ -24,28 +24,28 @@ export const routerOptions = {
 
   routes: [{
     path: "/admin",
-    component: _6c1e6255,
+    component: _5d8db89d,
     name: "admin",
     children: [{
       path: "homes",
-      component: _8e5813a2,
+      component: _225e19fc,
       name: "admin-homes"
     }]
   }, {
     path: "/no-access",
-    component: _6d1b7314,
+    component: _2b3d38be,
     name: "no-access"
   }, {
     path: "/search",
-    component: _721cd3dc,
+    component: _036d08ca,
     name: "search"
   }, {
     path: "/home/:id?",
-    component: _086216c1,
+    component: _9b64b7a8,
     name: "home-id"
   }, {
     path: "/",
-    component: _3aaf0e58,
+    component: _2c1e64a0,
     name: "index"
   }],
 
