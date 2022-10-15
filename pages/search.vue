@@ -3,14 +3,19 @@
 		<div class="app-search-results">
 			<div class="app-search-results-listing">
 				<h2 class="app-title">Stays in {{ label }}</h2>
-				<nuxt-link v-for="home in homes" :key="home.objectID" :to="`/home/${home.objectID}`">
-					<HomeRow
-						class="app-house"
-						:home="home"
-						@mouseover.native="highlightMarker(home.objectID, true)"
-						@mouseout.native="highlightMarker(home.objectID, false)"
-					/>
-				</nuxt-link>
+				<div v-if="!!homes.length">
+					<nuxt-link v-for="home in homes" :key="home.objectID" :to="`/home/${home.objectID}`">
+						<HomeRow
+							class="app-house"
+							:home="home"
+							@mouseover.native="highlightMarker(home.objectID, true)"
+							@mouseout.native="highlightMarker(home.objectID, false)"
+						/>
+					</nuxt-link>
+				</div>
+				<div v-else>
+					<h3>No homes found</h3>
+				</div>
 			</div>
 			<div class="app-search-results-map">
 				<div class="app-map" ref="map"></div>
@@ -55,7 +60,13 @@ export default {
 		},
 	},
 	async beforeRouteUpdate(to, from, next) {
-		const data = await this.$dataApi.getHomesByLocation(to.query.lat, to.query.lng);
+		//updating the data fetch with the start and end dates
+		const data = await this.$dataApi.getHomesByLocation(
+			to.query.lat,
+			to.query.lng,
+			to.query.start,
+			to.query.end
+		);
 		this.homes = data.json.hits;
 		this.label = to.query.label;
 		this.lat = to.query.lat;
@@ -64,7 +75,8 @@ export default {
 		next();
 	},
 	async asyncData({ query, $dataApi }) {
-		const data = await $dataApi.getHomesByLocation(query.lat, query.lng);
+		//updating the data fetch with the start and end dates
+		const data = await $dataApi.getHomesByLocation(query.lat, query.lng, query.start, query.end);
 		return {
 			homes: data.json.hits,
 			label: query.label,

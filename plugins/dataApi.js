@@ -59,8 +59,13 @@ export default function ({ $config }, inject) {
 		}
 	}
 
-	async function getHomesByLocation(lat, lng, radiusInMeters = 1500 * 15) {
+	async function getHomesByLocation(lat, lng, start, end, radiusInMeters = 1500 * 15) {
 		try {
+			//adding the EPOCH dates to an array so algolia can filter them
+			const days = [];
+			for (var day = start; day <= end; day += 86400) {
+				days.push(`availability:${day}`);
+			}
 			return unWrap(
 				await fetch(`${ALGOLIA_URL}/home/query`, {
 					headers,
@@ -69,6 +74,8 @@ export default function ({ $config }, inject) {
 						aroundLatLng: `${lat},${lng}`,
 						aroundRadius: radiusInMeters,
 						hitsPerPage: 10,
+						//using filters to concatenate query
+						filters: days.join(' AND '),
 						attributesToHighlight: [],
 					}),
 				})
