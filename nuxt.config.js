@@ -56,6 +56,9 @@ export default {
 		cloudinary: {
 			apiKey: process.env.CLOUDINARY_API_KEY,
 		},
+		stripe: {
+			key: 'pk_test_51LtJ0PAWeOsgC9iQklx0T9rBiGi7qZAOxjH0ivsYCjVoRSrtCQv5C6y5056RdUBbHXxY3ztVORDbYWWV7cHB3ADb00DJlQXu6X',
+		},
 	},
 	privateRuntimeConfig: {
 		algolia: {
@@ -64,6 +67,9 @@ export default {
 		},
 		cloudinary: {
 			apiSecret: process.env.CLOUDINARY_API_SECRET,
+		},
+		stripe: {
+			secretKey: process.env.STRIPE_SECRET_KEY,
 		},
 	},
 };
