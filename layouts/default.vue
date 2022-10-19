@@ -34,8 +34,7 @@
 			</div>
 			<div class="app-user-menu">
 				<template v-if="isLoggedIn">
-					<img src="/images/icons/house.svg" />
-					<div class="name">Host</div>
+					<div class="name">Hello, {{ user.fullName }}</div>
 					<img :src="user.profileUrl" class="avatar" />
 				</template>
 				<div v-show="!isLoggedIn" id="googleButton" class="ml-8">
@@ -96,7 +95,8 @@ export default {
 	methods: {
 		//this will fire when the seach button is clicked
 		search() {
-			if (!this.location.label) return;
+			//checking if there's a address and range selected before searching
+			if (!this.location.label || !this.range.start || !this.range.end) return;
 			this.$router.push({
 				name: 'search',
 				query: {

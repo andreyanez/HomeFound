@@ -63,7 +63,7 @@ export default function ({ $config }, inject) {
 		try {
 			//adding the EPOCH dates to an array so algolia can filter them
 			const days = [];
-			for (var day = start; day <= end; day += 86400) {
+			for (var day = parseInt(start); day <= parseInt(end); day += 86400) {
 				days.push(`availability:${day}`);
 			}
 			return unWrap(
