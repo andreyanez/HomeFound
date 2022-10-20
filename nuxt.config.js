@@ -20,8 +20,15 @@ export default {
 		'~/plugins/auth2.client',
 		'~/plugins/dataApi',
 		'~/plugins/vCalendar.client',
+		'~/plugins/stripe.client',
 	],
-	modules: ['~/modules/auth', '~/modules/algolia', '~/modules/cloudinary', '@nuxtjs/cloudinary'],
+	modules: [
+		'~/modules/auth',
+		'~/modules/stripe',
+		'~/modules/algolia',
+		'~/modules/cloudinary',
+		'@nuxtjs/cloudinary',
+	],
 	cloudinary: {
 		cloudName: 'simuniver',
 	},

@@ -1,4 +1,4 @@
-import { sendJSON } from '../helpers';
+import { sendJSON } from '../../helpers';
 export default apis => {
 	//Auth flow part 3: The getUserRoute function
 	//gets the request which has the data sent from

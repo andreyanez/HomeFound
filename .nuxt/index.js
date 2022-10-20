@@ -5,7 +5,7 @@ import ClientOnly from 'vue-client-only'
 import NoSsr from 'vue-no-ssr'
 import { createRouter } from './router.js'
 import NuxtChild from './components/nuxt-child.js'
-import NuxtError from '../layouts/error.vue'
+import NuxtError from '..\\layouts\\error.vue'
 import Nuxt from './components/nuxt.js'
 import App from './App.js'
 import { setContext, getLocation, getRouteData, normalizeError } from './utils'
@@ -13,14 +13,14 @@ import { createStore } from './store.js'
 
 /* Plugins */
 
-import nuxt_plugin_plugin_7cb6c3e8 from 'nuxt_plugin_plugin_7cb6c3e8' // Source: ./components/plugin.js (mode: 'all')
-import nuxt_plugin_pluginclient_3fabe256 from 'nuxt_plugin_pluginclient_3fabe256' // Source: ./cloudinary/plugin.client.js (mode: 'client')
-import nuxt_plugin_pluginserver_45e3805d from 'nuxt_plugin_pluginserver_45e3805d' // Source: ./cloudinary/plugin.server.js (mode: 'server')
-import nuxt_plugin_image_3f3887f9 from 'nuxt_plugin_image_3f3887f9' // Source: ./image.js (mode: 'all')
-import nuxt_plugin_maps_6ed989cc from 'nuxt_plugin_maps_6ed989cc' // Source: ../plugins/maps.client (mode: 'client')
-import nuxt_plugin_auth2_7e7ca5b6 from 'nuxt_plugin_auth2_7e7ca5b6' // Source: ../plugins/auth2.client (mode: 'client')
-import nuxt_plugin_dataApi_3cd42dda from 'nuxt_plugin_dataApi_3cd42dda' // Source: ../plugins/dataApi (mode: 'all')
-import nuxt_plugin_vCalendar_7837889b from 'nuxt_plugin_vCalendar_7837889b' // Source: ../plugins/vCalendar.client (mode: 'client')
+import nuxt_plugin_plugin_3bb570b6 from 'nuxt_plugin_plugin_3bb570b6' // Source: .\\components\\plugin.js (mode: 'all')
+import nuxt_plugin_pluginclient_0e304c78 from 'nuxt_plugin_pluginclient_0e304c78' // Source: .\\cloudinary\\plugin.client.js (mode: 'client')
+import nuxt_plugin_pluginserver_73e9be00 from 'nuxt_plugin_pluginserver_73e9be00' // Source: .\\cloudinary\\plugin.server.js (mode: 'server')
+import nuxt_plugin_image_3c7e4843 from 'nuxt_plugin_image_3c7e4843' // Source: .\\image.js (mode: 'all')
+import nuxt_plugin_maps_6ed989cc from 'nuxt_plugin_maps_6ed989cc' // Source: ..\\plugins\\maps.client (mode: 'client')
+import nuxt_plugin_auth2_7e7ca5b6 from 'nuxt_plugin_auth2_7e7ca5b6' // Source: ..\\plugins\\auth2.client (mode: 'client')
+import nuxt_plugin_dataApi_3cd42dda from 'nuxt_plugin_dataApi_3cd42dda' // Source: ..\\plugins\\dataApi (mode: 'all')
+import nuxt_plugin_vCalendar_7837889b from 'nuxt_plugin_vCalendar_7837889b' // Source: ..\\plugins\\vCalendar.client (mode: 'client')
 
 // Component: <ClientOnly>
 Vue.component(ClientOnly.name, ClientOnly)
@@ -217,20 +217,20 @@ async function createApp(ssrContext, config = {}) {
   }
   // Plugin execution
 
-  if (typeof nuxt_plugin_plugin_7cb6c3e8 === 'function') {
-    await nuxt_plugin_plugin_7cb6c3e8(app.context, inject)
+  if (typeof nuxt_plugin_plugin_3bb570b6 === 'function') {
+    await nuxt_plugin_plugin_3bb570b6(app.context, inject)
   }
 
-  if (process.client && typeof nuxt_plugin_pluginclient_3fabe256 === 'function') {
-    await nuxt_plugin_pluginclient_3fabe256(app.context, inject)
+  if (process.client && typeof nuxt_plugin_pluginclient_0e304c78 === 'function') {
+    await nuxt_plugin_pluginclient_0e304c78(app.context, inject)
   }
 
-  if (process.server && typeof nuxt_plugin_pluginserver_45e3805d === 'function') {
-    await nuxt_plugin_pluginserver_45e3805d(app.context, inject)
+  if (process.server && typeof nuxt_plugin_pluginserver_73e9be00 === 'function') {
+    await nuxt_plugin_pluginserver_73e9be00(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_image_3f3887f9 === 'function') {
-    await nuxt_plugin_image_3f3887f9(app.context, inject)
+  if (typeof nuxt_plugin_image_3c7e4843 === 'function') {
+    await nuxt_plugin_image_3c7e4843(app.context, inject)
   }
 
   if (process.client && typeof nuxt_plugin_maps_6ed989cc === 'function') {

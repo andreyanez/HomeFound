@@ -1,4 +1,4 @@
-import { getHeaders } from '../helpers';
+import { getHeaders } from '../../helpers';
 import fetch from 'node-fetch';
 import { unWrap, getErrorResponse } from '../../../utils/fetching';
 
@@ -34,6 +34,20 @@ export default algoliaConfig => {
 							headers,
 							method: 'PUT',
 							body: JSON.stringify(payload),
+						}
+					)
+				);
+			} catch (error) {
+				return getErrorResponse(error);
+			}
+		},
+		get: async homeId => {
+			try {
+				return unWrap(
+					await fetch(
+						`https://${algoliaConfig.algolia_app_id}-dsn.algolia.net/1/indexes/homes/${homeId}`,
+						{
+							headers,
 						}
 					)
 				);
