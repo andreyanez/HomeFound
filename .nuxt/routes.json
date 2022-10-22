@@ -2,45 +2,39 @@
   {
     "name": "admin",
     "path": "/admin",
-    "component": "C:\\\\Dev\\\\airbnb_clone\\\\pages\\\\admin.vue",
+    "component": "/mnt/x/Dev/airbnb_clone/pages/admin.vue",
     "chunkName": "pages/admin",
     "children": [
       {
         "name": "admin-homes",
         "path": "homes",
-        "component": "C:\\\\Dev\\\\airbnb_clone\\\\pages\\\\admin\\\\homes.vue",
-        "chunkName": "pages/admin/homes",
-        "_name": "_8e5813a2"
+        "component": "/mnt/x/Dev/airbnb_clone/pages/admin/homes.vue",
+        "chunkName": "pages/admin/homes"
       }
-    ],
-    "_name": "_6c1e6255"
+    ]
   },
   {
     "name": "no-access",
     "path": "/no-access",
-    "component": "C:\\\\Dev\\\\airbnb_clone\\\\pages\\\\no-access.vue",
-    "chunkName": "pages/no-access",
-    "_name": "_6d1b7314"
+    "component": "/mnt/x/Dev/airbnb_clone/pages/no-access.vue",
+    "chunkName": "pages/no-access"
   },
   {
     "name": "search",
     "path": "/search",
-    "component": "C:\\\\Dev\\\\airbnb_clone\\\\pages\\\\search.vue",
-    "chunkName": "pages/search",
-    "_name": "_721cd3dc"
+    "component": "/mnt/x/Dev/airbnb_clone/pages/search.vue",
+    "chunkName": "pages/search"
   },
   {
     "name": "home-id",
     "path": "/home/:id?",
-    "component": "C:\\\\Dev\\\\airbnb_clone\\\\pages\\\\home\\\\_id.vue",
-    "chunkName": "pages/home/_id",
-    "_name": "_086216c1"
+    "component": "/mnt/x/Dev/airbnb_clone/pages/home/_id.vue",
+    "chunkName": "pages/home/_id"
   },
   {
     "name": "index",
     "path": "/",
-    "component": "C:\\\\Dev\\\\airbnb_clone\\\\pages\\\\index.vue",
-    "chunkName": "pages/index",
-    "_name": "_3aaf0e58"
+    "component": "/mnt/x/Dev/airbnb_clone/pages/index.vue",
+    "chunkName": "pages/index"
   }
 ]

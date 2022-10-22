@@ -9,6 +9,7 @@ export default {
 				charset: 'utf-8',
 			},
 		],
+		link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
 	},
 	router: {
 		prefetchLinks: false,

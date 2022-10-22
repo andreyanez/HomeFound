@@ -3,9 +3,9 @@ import { createImage} from '~image'
 import NuxtImg from '~image/components/nuxt-img.vue'
 import NuxtPicture from '~image/components/nuxt-picture.vue'
 
-import * as staticRuntime$102a from 'C:/Dev/airbnb_clone/node_modules/@nuxt/image/dist/runtime/providers/static.js'
-import * as cloudinaryRuntime$13c4 from 'C:/Dev/airbnb_clone/node_modules/@nuxt/image/dist/runtime/providers/cloudinary.js'
-import * as ipxRuntime$bd1e from 'C:/Dev/airbnb_clone/node_modules/@nuxt/image/dist/runtime/providers/ipx.js'
+import * as staticRuntime$7636 from '/mnt/x/Dev/airbnb_clone/node_modules/@nuxt/image/dist/runtime/providers/static.js'
+import * as cloudinaryRuntime$380c from '/mnt/x/Dev/airbnb_clone/node_modules/@nuxt/image/dist/runtime/providers/cloudinary.js'
+import * as ipxRuntime$61a2 from '/mnt/x/Dev/airbnb_clone/node_modules/@nuxt/image/dist/runtime/providers/ipx.js'
 
 const imageOptions = {
   "screens": {
@@ -24,9 +24,9 @@ const imageOptions = {
 }
 
 imageOptions.providers = {
-  ['static']: { provider: staticRuntime$102a, defaults: {} },
-  ['cloudinary']: { provider: cloudinaryRuntime$13c4, defaults: {"baseURL":"https://res.cloudinary.com/simuniver/image/upload/"} },
-  ['ipx']: { provider: ipxRuntime$bd1e, defaults: {} }
+  ['static']: { provider: staticRuntime$7636, defaults: {} },
+  ['cloudinary']: { provider: cloudinaryRuntime$380c, defaults: {"baseURL":"https://res.cloudinary.com/simuniver/image/upload/"} },
+  ['ipx']: { provider: ipxRuntime$61a2, defaults: {} }
 }
 
 Vue.component(NuxtImg.name, NuxtImg)

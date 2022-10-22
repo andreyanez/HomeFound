@@ -51,6 +51,22 @@ export default {
 	methods: {
 		pluralize,
 		checkout() {
+			//checking if user selected a date range
+			if (!this.range.start || !this.range.end) {
+				alert('Please select a start and end date');
+				return;
+			}
+			//checking if user selected a date range within a day apart
+			if (this.range.start.toString() == this.range.end.toString()) {
+				alert('Start and end dates must be at least 1 day apart');
+				return;
+			}
+			//checking if user is logged in before booking
+			if (!this.$store.state.auth.isLoggedIn) {
+				alert('You must sign in to book your stay');
+				return;
+			}
+
 			const start = this.range.start.getTime() / 1000;
 			const end = this.range.end.getTime() / 1000;
 			//calling the new stripe plugin

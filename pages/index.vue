@@ -1,10 +1,13 @@
 <template>
-	<div>
-		<ul>
-			<li v-for="home in homes" :key="home.objectID">
-				<nuxt-link :to="`/home/${home.objectID}`" prefetch><home-card :home="home" /></nuxt-link>
-			</li>
-		</ul>
+	<div class="app">
+		<div class="app-container">
+			<div class="app-hero">
+				<h2>- Settle in somewhere new. Discover stays to live, work, or just relax.</h2>
+			</div>
+		</div>
+		<!-- <SectionPremiumListings /> -->
+		<!-- <SectionRecentlyAdded class="app-background-grey" :homes="homes" /> -->
+		<!-- <SectionMore /> -->
 	</div>
 </template>
 
@@ -12,11 +15,11 @@
 export default {
 	head() {
 		return {
-			title: 'Homepage',
+			title: 'Airbnb_Clone',
 			meta: [
 				{
 					name: 'description',
-					content: 'This is a homepage!',
+					content: 'Airbnb clone made in Nuxt!',
 					hid: 'description',
 				},
 			],

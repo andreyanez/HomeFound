@@ -1,7 +1,9 @@
 <template>
 	<div class="app">
 		<header class="app-header">
-			<div class="app-logo"></div>
+			<nuxt-link to="/" class="app-logo">
+				<img src="/company_logo.png" alt="airbnb_clone" width="150" />
+			</nuxt-link>
 			<div class="app-search">
 				<input type="text" ref="citySearch" @changed="changed" placeholder="Enter your address" />
 				<!-- //client only gets used to render the html after the server has rendered the page
