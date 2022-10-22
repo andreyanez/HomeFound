@@ -29,15 +29,15 @@ export default function ({ $config }, inject) {
 		try {
 			return unWrap(
 				await fetch(`/api/stripe/create-session`, {
-					headers: {
-						'Content-Type': 'application/json',
-					},
 					method: 'POST',
 					body: JSON.stringify({
 						homeId,
 						start,
 						end,
 					}),
+					headers: {
+						'Content-Type': 'application/json',
+					},
 				})
 			);
 		} catch (error) {

@@ -29,8 +29,18 @@
 						class="app-search"
 					>
 						<template v-slot="{ inputValue, inputEvents }">
-							<input :value="inputValue.start" v-on="inputEvents.start" class="datepicker" />
-							<input :value="inputValue.end" v-on="inputEvents.end" class="datepicker" />
+							<input
+								:value="inputValue.start"
+								v-on="inputEvents.start"
+								class="datepicker"
+								placeholder="Check in"
+							/>
+							<input
+								:value="inputValue.end"
+								v-on="inputEvents.end"
+								class="datepicker"
+								placeholder="Check out"
+							/>
 						</template>
 					</date-picker>
 				</client-only>
@@ -47,6 +57,11 @@ export default {
 			type: Object,
 			required: true,
 		},
+	},
+	mounted() {
+		if (this.$route.query.result == 'success') {
+			alert('Success!');
+		}
 	},
 	methods: {
 		pluralize,

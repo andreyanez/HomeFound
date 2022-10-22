@@ -45,7 +45,7 @@ export default algoliaConfig => {
 			try {
 				return unWrap(
 					await fetch(
-						`https://${algoliaConfig.algolia_app_id}-dsn.algolia.net/1/indexes/homes/${homeId}`,
+						`https://${algoliaConfig.algolia_app_id}-dsn.algolia.net/1/indexes/home/${homeId}`,
 						{
 							headers,
 						}

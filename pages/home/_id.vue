@@ -1,5 +1,5 @@
 <template>
-	<div class="app-container">
+	<div class="app-container pt-40">
 		<property-gallery :images="home.images" />
 		<property-details :home="home" />
 		<property-description :home="home" />
