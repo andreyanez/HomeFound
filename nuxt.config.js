@@ -1,5 +1,9 @@
 export default {
 	components: true,
+	rootUrl:
+		process.env.NODE_ENV === 'production'
+			? 'https://nuxtairbnbclone.vercel.app'
+			: 'http://localhost:3000',
 	head: {
 		htmlAttrs: {
 			lang: 'en',

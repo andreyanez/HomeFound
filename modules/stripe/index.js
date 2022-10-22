@@ -9,6 +9,8 @@ export default function () {
 	const secretKey = this.options.privateRuntimeConfig.stripe.secretKey;
 	const stripe = stripeLib(secretKey);
 	const cloudName = this.options.cloudinary.cloudName;
+	//adding dynamic url depending on dev or prod enviroment
+	const rootUrl = this.options.rootUrl;
 
 	this.nuxt.hook('render:setupMiddleware', app => {
 		app.use(bodyParser.json());
@@ -31,8 +33,8 @@ export default function () {
 		const session = await stripe.checkout.sessions.create({
 			payment_method_types: ['card'],
 			mode: 'payment',
-			success_url: `http://localhost:3000/home/${body.homeId}?result=success`,
-			cancel_url: `http://localhost:3000/home/${body.homeId}`,
+			success_url: `${rootUrl}/home/${body.homeId}?result=success`,
+			cancel_url: `${rootUrl}/home/${body.homeId}`,
 			line_items: [
 				{
 					quantity: 1,
