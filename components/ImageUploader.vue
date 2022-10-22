@@ -1,6 +1,10 @@
 <template>
-	<div>
-		<input type="file" name="imageUploader" @change="uploaded" />
+	<div class="mt-1 p-6 border-2 border-gray-300 border-dashed rounded-md w-fit">
+		<div class="space-y-1 text-center block">
+			<div class="flex text-sm text-gray-600">
+				<input id="file-upload" type="file" class="" name="imageUploader" @change="uploaded" />
+			</div>
+		</div>
 	</div>
 </template>
 

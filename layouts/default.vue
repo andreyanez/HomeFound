@@ -1,6 +1,6 @@
 <template>
 	<div class="app bg-gray-100">
-		<header class="app-header fixed top-0 w-full z-20 bg-gray-100">
+		<header class="app-header fixed top-0 w-full z-20 bg-gray-100" id="header">
 			<nuxt-link to="/" class="app-logo">
 				<img src="/company_logo.svg" alt="airbnb_clone" width="150" />
 			</nuxt-link>
@@ -104,6 +104,7 @@ export default {
 	//it can deliver a complete html page
 	mounted() {
 		this.$maps.makeAutoComplete(this.$refs.citySearch);
+		window.addEventListener('scroll', this.scrollHeader);
 	},
 	// Created these computed methods to expose the user data
 	// and to condition rendering based on if user is logged in
@@ -139,6 +140,15 @@ export default {
 			this.location.lat = place.geometry.location.lat();
 			this.location.lng = place.geometry.location.lng();
 			this.location.label = this.$refs.citySearch.value;
+		},
+		//simple event that adds class to header on scroll
+		scrollHeader(e) {
+			const navbarElement = document.getElementById('header');
+			if (e.target.scrollingElement.scrollTop >= 15) {
+				navbarElement.classList.add('activated');
+			} else {
+				navbarElement.classList.remove('activated');
+			}
 		},
 	},
 };

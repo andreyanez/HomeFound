@@ -6,6 +6,7 @@ module.exports = {
 		animation: false,
 		textOpacity: false,
 	},
+	plugins: [require('@tailwindcss/forms')],
 	theme: {
 		extend: {
 			colors: {

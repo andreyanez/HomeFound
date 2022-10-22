@@ -1,64 +1,267 @@
 <template>
-	<div>
-		<span v-for="home in homeList" :key="home.objectID"
-			>{{ home.title }}:
-			<button class="text-red-800" @click="deleteHome(home.objectID)">Delete</button><br />
-		</span>
-		<h2 class="text-xl bold">Add a Home</h2>
-		<form class="form" @submit.prevent="onSubmit">
-			Images:<br />
-			<ImageUploader @file-uploaded="imageUpdated($event, 0)" />
-			<ImageUploader @file-uploaded="imageUpdated($event, 1)" />
-			<ImageUploader @file-uploaded="imageUpdated($event, 2)" />
-			<ImageUploader @file-uploaded="imageUpdated($event, 3)" />
-			<ImageUploader @file-uploaded="imageUpdated($event, 4)" />
-			Title: <br />
-			<input type="text" v-model="home.title" class="w-60" /><br />
-			Description<br />
-			<textarea v-model="home.description" class="w-104"></textarea><br />
-			Note<br />
-			<textarea v-model="home.note" class="w-104"></textarea><br />
-			Features<br />
-			<input type="text" v-model="home.features[0]" class="w-26" />
-			<input type="text" v-model="home.features[1]" class="w-26" />
-			<input type="text" v-model="home.features[2]" class="w-26" />
-			<input type="text" v-model="home.features[3]" class="w-26" />
-			<input type="text" v-model="home.features[4]" class="w-26" /><br />
-			Price Per Night<br />
-			<input type="number" v-model="home.pricePerNight" class="w-14" /><br />
-			Guests / Rooms / Beds / Baths<br />
-			<input type="number" v-model="home.guests" class="w-14" />
-			<input type="number" v-model="home.bedrooms" class="w-14" />
-			<input type="number" v-model="home.beds" class="w-14" />
-			<input type="number" v-model="home.bathrooms" class="w-14" /><br />
-			<input
-				type="text"
-				ref="locationSelector"
-				autocomplete="off"
-				placeholder="Select a location"
-				@changed="changed"
-			/><br />
-			Address: <input type="text" v-model="home.location.address" class="w-60" /><br />
-			City: <input type="text" v-model="home.location.city" class="w-26" /><br />
-			State: <input type="text" v-model="home.location.state" class="w-26" /><br />
-			Postal Code: <input type="text" v-model="home.location.postalCode" class="w-26" /><br />
-			Country: <input type="text" v-model="home.location.country" class="w-26" /><br />
-			<date-picker
-				v-for="(range, index) in home.availabilityRanges"
-				:key="index"
-				v-model="home.availabilityRanges[index]"
-				is-range
-				timezone="UTC"
-				:modelConfig="{ timeAdjust: '00:00:00' }"
-			>
-				<template v-slot="{ inputValue, inputEvents }">
-					<input :value="inputValue.start" v-on="inputEvents.start" />
-					to
-					<input :value="inputValue.end" v-on="inputEvents.end" /><br />
-				</template>
-			</date-picker>
-			<button class="border px-4 py-2 border-gray-400">Add</button>
-		</form>
+	<div class="border-gray-400 rounded-3xl border-2 p-9 flex justify-between mb-12">
+		<div class="homes__list">
+			<h3 class="text-3xl leading-6 font-medium text-gray-900 mb-7">Your list of homes</h3>
+			<ul>
+				<li v-for="home in homeList" :key="home.objectID" class="mb-4">
+					<p class="">{{ home.title }}</p>
+					<button class="text-red-800" @click="deleteHome(home.objectID)">Delete</button>
+				</li>
+			</ul>
+		</div>
+		<div class="homes__form w-3/4">
+			<h2 class="text-3xl leading-6 font-medium text-gray-900 mb-7">Add a Home</h2>
+
+			<form class="space-y-8 divide-y divide-gray-200" @submit.prevent="onSubmit">
+				<div class="space-y-8 divide-y divide-gray-200">
+					<div>
+						<div>
+							<h3 class="text-lg leading-6 font-medium text-gray-900">Home Information</h3>
+							<p class="mt-1 text-sm text-gray-500">Register the details of your home</p>
+						</div>
+						<div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+							<div class="sm:col-span-3">
+								<label for="home-name" class="block text-sm font-medium text-gray-700">
+									Title
+								</label>
+								<div class="mt-1">
+									<input
+										type="text"
+										name="home-name"
+										id="home-name"
+										v-model="home.title"
+										autocomplete="given-name"
+										class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+									/>
+								</div>
+							</div>
+
+							<div class="sm:col-span-4">
+								<label for="about" class="block text-sm font-medium text-gray-700"> About </label>
+								<div class="mt-1">
+									<textarea
+										id="about"
+										name="about"
+										rows="3"
+										v-model="home.description"
+										class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md"
+									></textarea>
+								</div>
+								<p class="mt-2 text-sm text-gray-500">Describe your home.</p>
+							</div>
+
+							<div class="sm:col-span-4">
+								<label for="note" class="block text-sm font-medium text-gray-700"> Note </label>
+								<div class="mt-1">
+									<input
+										v-model="home.note"
+										id="note"
+										name="note"
+										type="text"
+										class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+									/>
+								</div>
+							</div>
+
+							<div class="sm:col-span-6">
+								<label for="features" class="block text-sm font-medium text-gray-700">
+									Features
+								</label>
+								<div class="flex flex-wrap gap-5">
+									<div class="mt-1">
+										<input
+											type="text"
+											name="Feature"
+											v-model="home.features[0]"
+											class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+										/>
+									</div>
+									<div class="mt-1">
+										<input
+											type="text"
+											name="Feature"
+											v-model="home.features[1]"
+											class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+										/>
+									</div>
+
+									<div class="mt-1">
+										<input
+											type="text"
+											name="Feature"
+											v-model="home.features[2]"
+											class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+										/>
+									</div>
+									<div class="mt-1">
+										<input
+											type="text"
+											name="Feature"
+											v-model="home.features[3]"
+											class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+										/>
+									</div>
+								</div>
+							</div>
+							<div class="sm:col-span-2">
+								<label for="price" class="block text-sm font-medium text-gray-700">
+									Price Per Night
+								</label>
+								<div class="mt-1">
+									<input
+										type="number"
+										name="price"
+										id="price"
+										v-model="home.pricePerNight"
+										class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+									/>
+								</div>
+							</div>
+							<div class="flex flex-wrap gap-5 sm:col-span-6">
+								<div>
+									<label for="guests" class="block text-sm font-medium text-gray-700">
+										Guests
+									</label>
+									<div class="mt-1">
+										<input
+											type="number"
+											name="guests"
+											id="guests"
+											v-model="home.guests"
+											class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+										/>
+									</div>
+								</div>
+								<div>
+									<label for="bedrooms" class="block text-sm font-medium text-gray-700">
+										Bedrooms
+									</label>
+									<div class="mt-1">
+										<input
+											type="number"
+											name="bedrooms"
+											id="bedrooms"
+											v-model="home.bedrooms"
+											class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+										/>
+									</div>
+								</div>
+								<div>
+									<label for="beds" class="block text-sm font-medium text-gray-700"> Beds </label>
+									<div class="mt-1">
+										<input
+											type="number"
+											name="beds"
+											id="beds"
+											v-model="home.beds"
+											class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+										/>
+									</div>
+								</div>
+								<div>
+									<label for="bathrooms" class="block text-sm font-medium text-gray-700">
+										Bathrooms
+									</label>
+									<div class="mt-1">
+										<input
+											type="number"
+											name="bathrooms"
+											id="bathrooms"
+											v-model="home.bathrooms"
+											class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+										/>
+									</div>
+								</div>
+							</div>
+							<div class="sm:col-span-4">
+								<label for="price" class="block text-sm font-medium text-gray-700">
+									Location
+								</label>
+								<div class="mt-1">
+									<input
+										type="text"
+										ref="locationSelector"
+										autocomplete="off"
+										placeholder="Select a location"
+										@changed="changed"
+										name="location"
+										id="location"
+										class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+									/>
+								</div>
+							</div>
+							<div class="sm:col-span-6 flex flex-wrap gap-5">
+								<p>Address: {{ home.location.address }}</p>
+								<p>City: {{ home.location.city }}</p>
+								<p>State: {{ home.location.state }}</p>
+								<p>Postal Code: {{ home.location.postalCode }}</p>
+								<p>Country: {{ home.location.country }}</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="pt-8">
+						<div>
+							<h3 class="text-lg leading-6 font-medium text-gray-900">Images</h3>
+							<p class="mt-1 text-sm text-gray-500">Add up to 4 images total.</p>
+						</div>
+						<div class="mt-6 gap-y-6 gap-x-4">
+							<div class="flex flex-wrap">
+								<ImageUploader @file-uploaded="imageUpdated($event, 0)" />
+								<ImageUploader @file-uploaded="imageUpdated($event, 1)" />
+								<ImageUploader @file-uploaded="imageUpdated($event, 2)" />
+								<ImageUploader @file-uploaded="imageUpdated($event, 3)" />
+							</div>
+						</div>
+					</div>
+
+					<div class="pt-8">
+						<div>
+							<h3 class="text-lg leading-6 font-medium text-gray-900">Property Availability</h3>
+							<p class="mt-1 text-sm text-gray-500">Set up to two possible ranges for your home.</p>
+						</div>
+						<div class="mt-6 gap-y-6 gap-x-4">
+							<date-picker
+								v-for="(range, index) in home.availabilityRanges"
+								:key="index"
+								v-model="home.availabilityRanges[index]"
+								is-range
+								timezone="UTC"
+								:modelConfig="{ timeAdjust: '00:00:00' }"
+							>
+								<template v-slot="{ inputValue, inputEvents }">
+									<div class="mb-4">
+										<span class="inline-block mr-2">From</span>
+										<input
+											:value="inputValue.start"
+											class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2 sm:text-sm border-gray-300 rounded-md"
+											v-on="inputEvents.start"
+										/>
+										<span class="inline-block mx-2">to</span>
+										<input
+											:value="inputValue.end"
+											class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2 sm:text-sm border-gray-300 rounded-md"
+											v-on="inputEvents.end"
+										/>
+									</div>
+								</template>
+							</date-picker>
+						</div>
+					</div>
+				</div>
+
+				<div class="pt-5">
+					<div class="flex justify-end">
+						<button
+							type="submit"
+							class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-dodger-blue hover:bg-polo-blue focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+						>
+							Add Home
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
 	</div>
 </template>
 <script>
@@ -76,7 +279,7 @@ export default {
 				bedrooms: '',
 				beds: '',
 				bathrooms: '',
-				features: ['', '', '', '', ''],
+				features: ['', '', '', ''],
 				location: {
 					address: '',
 					city: '',
@@ -162,9 +365,3 @@ export default {
 	},
 };
 </script>
-<style scoped>
-.form input,
-.form textarea {
-	@apply p-1 m-1 bg-gray-200;
-}
-</style>

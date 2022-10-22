@@ -12,6 +12,17 @@ $cities: paris, new-york, london, dubai, san-francisco, cancun;
 	}
 }
 
+.homes__list {
+	width: 35%;
+}
+
+#header {
+	&.activated {
+		@apply shadow-lg;
+		transition: all 400ms ease;
+	}
+}
+
 .app {
 	&-flex {
 		@apply flex justify-between items-center;
