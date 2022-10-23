@@ -1,9 +1,6 @@
 export default {
 	components: true,
-	rootUrl:
-		process.env.NODE_ENV === 'production'
-			? 'https://nuxtairbnbclone.vercel.app'
-			: 'http://localhost:3000',
+
 	head: {
 		htmlAttrs: {
 			lang: 'en',
@@ -56,6 +53,10 @@ export default {
 	// Environment variables
 	//env variables now stored on nuxt's runtime config
 	publicRuntimeConfig: {
+		rootUrl:
+			process.env.NODE_ENV === 'production'
+				? 'https://nuxtairbnbclone.vercel.app'
+				: 'http://localhost:3000',
 		algolia: {
 			algolia_app_id: process.env.ALGOLIA_APP_ID,
 			algolia_search_key: process.env.ALGOLIA_SEARCH_KEY,

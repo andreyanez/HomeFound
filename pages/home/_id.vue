@@ -6,6 +6,7 @@
 		<property-map :home="home" />
 		<property-reviews :reviews="reviews" />
 		<property-host :user="user" />
+		<script type="application/ld+json" v-html="getSchema"></script>
 	</div>
 </template>
 <script>
@@ -13,7 +14,47 @@ export default {
 	head() {
 		return {
 			title: this.home.title,
+			//social card setup
+			meta: [
+				{ hid: 'og-type', property: 'og:type', content: 'website' },
+				{ hid: 'og-title', property: 'og:title', content: this.home.title },
+				{ hid: 'og-desc', property: 'og:description', content: this.home.description },
+				{
+					hid: 'og-image',
+					property: 'og:image',
+					content: this.$img(this.home.images[0], { width: 1200 }, { provider: 'cloudinary' }),
+				},
+				{
+					hid: 'og-url',
+					property: 'og:url',
+					content: `${this.$config.rootUrl}/home/${this.home.objectID}`,
+				},
+				{ hid: 't-type', name: 'twitter:card', content: 'summary_large_image' },
+			],
 		};
+	},
+	computed: {
+		// schema.org markup for seo
+		getSchema() {
+			return JSON.stringify({
+				'@context': 'http://schema.org',
+				'@type': 'BedAndBreakfast',
+				name: this.home.title,
+				image: this.$img(this.home.images[0], { width: 1200 }, { provider: 'cloudinary' }),
+				address: {
+					'@type': 'PostalAddress',
+					addressLocality: this.home.location.city,
+					addressRegion: this.home.location.state,
+					postalCode: this.home.location.zipcode,
+					streetAddress: this.home.location.address,
+				},
+				aggregateRating: {
+					'@type': 'AggregateRating',
+					ratingValue: this.home.reviewValue,
+					reviewCount: this.home.reviewCount,
+				},
+			});
+		},
 	},
 	async asyncData({ params, $dataApi, error }) {
 		//I changed the behavior of the data fetching due to unneccesary blocking with each call
