@@ -88,6 +88,7 @@ export default {
 			const start = this.range.start.getTime() / 1000;
 			const end = this.range.end.getTime() / 1000;
 			//calling the new stripe plugin
+			//sending the id of the home owner
 			this.$stripe.checkout(this.home.objectID, start, end);
 		},
 	},

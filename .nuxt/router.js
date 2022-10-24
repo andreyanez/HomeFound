@@ -8,6 +8,7 @@ const _5d8db89d = () => interopDefault(import('../pages/admin.vue' /* webpackChu
 const _225e19fc = () => interopDefault(import('../pages/admin/homes.vue' /* webpackChunkName: "pages/admin/homes" */))
 const _2b3d38be = () => interopDefault(import('../pages/no-access.vue' /* webpackChunkName: "pages/no-access" */))
 const _036d08ca = () => interopDefault(import('../pages/search.vue' /* webpackChunkName: "pages/search" */))
+const _7e74571b = () => interopDefault(import('../pages/booking/success.vue' /* webpackChunkName: "pages/booking/success" */))
 const _9b64b7a8 = () => interopDefault(import('../pages/home/_id.vue' /* webpackChunkName: "pages/home/_id" */))
 const _2c1e64a0 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
@@ -39,6 +40,10 @@ export const routerOptions = {
     path: "/search",
     component: _036d08ca,
     name: "search"
+  }, {
+    path: "/booking/success",
+    component: _7e74571b,
+    name: "booking-success"
   }, {
     path: "/home/:id?",
     component: _9b64b7a8,

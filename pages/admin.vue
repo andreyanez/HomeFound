@@ -16,6 +16,7 @@ export default {
 			redirect('/no-access/');
 			return;
 		}
+		console.log(Cookie);
 	},
 };
 </script>

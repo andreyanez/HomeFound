@@ -47,7 +47,7 @@ export default function () {
 			},
 			payment_method_types: ['card'],
 			mode: 'payment',
-			success_url: `${rootUrl}/home/${body.homeId}?result=success`,
+			success_url: `${rootUrl}/booking/success?result=success&id=${body.homeId}`,
 			cancel_url: `${rootUrl}/home/${body.homeId}`,
 			line_items: [
 				{

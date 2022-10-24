@@ -18,6 +18,13 @@ export default function () {
 		});
 	});
 
+	this.nuxt.hook('render:setupMiddleware', app => {
+		app.use('/booking', (req, res, next) => {
+			res.spa = true;
+			next();
+		});
+	});
+
 	//this handler function finds the cookie and parses it
 	//using the cookie library
 
