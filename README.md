@@ -4,13 +4,11 @@ Airbnb Clone made with the Nuxt.js framework. Find properties to book or registe
 
 ![websitepic](https://user-images.githubusercontent.com/39743205/197367955-a5797b77-f7dd-4d92-b026-a8a820409614.PNG)
 
-### 🔗 Links
-
 - [Live Site](https://nuxtairbnbclone.vercel.app/)
 
 ### 💰 Test Payment with Stripe
 
-You can request your apartment from the site now, you can use this info for stripe checkout page.
+You can use this info for stripe checkout page.
 
 - `Card Number`: `4242 4242 4242 4242`
 - `CVC`: Enter any three numbers
@@ -26,9 +24,9 @@ You can request your apartment from the site now, you can use this info for stri
 ![Stripe](https://img.shields.io/badge/Stripe-008CDD?style=for-the-badge&logo=Stripe&logoColor=white)
 ![VS Code](https://img.shields.io/badge/-VSCode-%23007ACC?style=for-the-badge&logo=visual-studio-code)
 
--Google Maps API and Oauth for both Authentication and map rendering
--Algolia for stored data and geosearching
--Cloudinary for image hosting and formatting and Stripe for payment.
+- Google Maps API and Oauth for both Authentication and map rendering
+- Algolia for stored data and geosearching
+- Cloudinary for image hosting and formatting and Stripe for payment.
 
 ## Optimizations
 
