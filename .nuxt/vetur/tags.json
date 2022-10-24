@@ -5,6 +5,9 @@
   "ImageUploader": {
     "description": "Auto imported from components/ImageUploader.vue"
   },
+  "LoadingSpinner": {
+    "description": "Auto imported from components/LoadingSpinner.vue"
+  },
   "PropertyDescription": {
     "description": "Auto imported from components/PropertyDescription.vue"
   },

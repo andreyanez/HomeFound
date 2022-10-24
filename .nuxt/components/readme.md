@@ -8,6 +8,7 @@ You can directly use them in pages and other components without the need to impo
 
 - `<HomeRow>` | `<home-row>` (components/HomeRow.vue)
 - `<ImageUploader>` | `<image-uploader>` (components/ImageUploader.vue)
+- `<LoadingSpinner>` | `<loading-spinner>` (components/LoadingSpinner.vue)
 - `<PropertyDescription>` | `<property-description>` (components/PropertyDescription.vue)
 - `<PropertyDetails>` | `<property-details>` (components/PropertyDetails.vue)
 - `<PropertyGallery>` | `<property-gallery>` (components/PropertyGallery.vue)

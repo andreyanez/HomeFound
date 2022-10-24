@@ -44,7 +44,10 @@
 						</template>
 					</date-picker>
 				</client-only>
-				<button class="app-big-button" @click="checkout">Request to book!</button>
+				<button class="app-big-button h-17" @click="checkout">
+					<span v-if="isLoading" class="block w-14"><LoadingSpinner size="50px" /></span>
+					<span v-else>Request to book!</span>
+				</button>
 			</div>
 		</div>
 	</div>
@@ -81,7 +84,7 @@ export default {
 				alert('You must sign in to book your stay');
 				return;
 			}
-
+			this.isLoading = true;
 			const start = this.range.start.getTime() / 1000;
 			const end = this.range.end.getTime() / 1000;
 			//calling the new stripe plugin
@@ -94,6 +97,7 @@ export default {
 				start: null,
 				end: null,
 			},
+			isLoading: false,
 		};
 	},
 };

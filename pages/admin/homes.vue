@@ -253,9 +253,10 @@
 					<div class="flex justify-end">
 						<button
 							type="submit"
-							class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-dodger-blue hover:bg-polo-blue focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+							class="w-22 h-9 inline-flex items-center justify-center border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-dodger-blue hover:bg-polo-blue focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
 						>
-							Add Home
+							<LoadingSpinner v-if="isLoading" size="20px" />
+							<span v-else>Add Home</span>
 						</button>
 					</div>
 				</div>
@@ -302,6 +303,7 @@ export default {
 					},
 				],
 			},
+			isLoading: false,
 		};
 	},
 	mounted() {
@@ -342,6 +344,8 @@ export default {
 			this.home.images[index] = imageUrl;
 		},
 		async onSubmit() {
+			this.isLoading = true;
+
 			// unwraping the response on a variable
 			//to be able to update the homeslist once a new
 			//home is added
@@ -360,6 +364,8 @@ export default {
 				title: this.home.title,
 				objectID: response.json.homeId,
 			});
+
+			this.isLoading = false;
 		},
 	},
 };
