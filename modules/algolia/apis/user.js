@@ -18,7 +18,9 @@ export default algoliaConfig => {
 		//assigning home to user
 		assignHome: async function (identity, homeId) {
 			const payload = (await this.getById(identity)).json;
+			console.log(payload);
 			payload.homeId.push(homeId);
+			console.log(payload);
 			this.create(identity, payload);
 		},
 		bookHome: async (identityId, homeId, start, end) => {
