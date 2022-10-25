@@ -1,6 +1,5 @@
 import { rejectHitBadRequest, hasBadBody, sendJSON } from '../../helpers';
 import { v4 as uuidv4 } from 'uuid';
-import { Logger } from 'sass';
 
 export default apis => {
 	return async (req, res) => {
@@ -35,7 +34,6 @@ export default apis => {
 
 	async function createHome(identity, body, res) {
 		const homeId = uuidv4();
-		console.log(homeId);
 		const payload = {
 			...body,
 			reviewCount: 0,
@@ -48,8 +46,6 @@ export default apis => {
 			res.end();
 			return;
 		}
-		console.log(resp.json);
-		console.log(homeId);
 		//assignin homes to user
 		await apis.user.assignHome(identity, homeId);
 		sendJSON({ homeId }, res);
