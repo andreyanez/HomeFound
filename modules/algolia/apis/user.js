@@ -20,7 +20,8 @@ export default algoliaConfig => {
 			const payload = (await this.getById(identity)).json;
 			payload.homeId.push(homeId);
 			// console.log(payload);
-			this.create(identity, payload);
+			const response = await this.create(identity, payload);
+			console.log(response);
 		},
 		bookHome: async (identityId, homeId, start, end) => {
 			try {
