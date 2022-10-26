@@ -13,15 +13,13 @@ export default algoliaConfig => {
 			const homes = payload.homeId.filter(id => id != homeId);
 			payload.homeId = homes;
 			//this.create updates the user with the updated data
-			this.create(identity, payload);
+			await this.create(identity, payload);
 		},
 		//assigning home to user
 		assignHome: async function (identity, homeId) {
 			const payload = (await this.getById(identity)).json;
 			payload.homeId.push(homeId);
-			// console.log(payload);
 			const response = await this.create(identity, payload);
-			console.log(response);
 		},
 		bookHome: async (identityId, homeId, start, end) => {
 			try {
