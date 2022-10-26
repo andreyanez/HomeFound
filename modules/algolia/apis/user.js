@@ -13,6 +13,7 @@ export default algoliaConfig => {
 			const homes = payload.homeId.filter(id => id != homeId);
 			payload.homeId = homes;
 			//this.create updates the user with the updated data
+			//added await for prod
 			await this.create(identity, payload);
 		},
 		//assigning home to user
