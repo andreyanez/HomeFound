@@ -66,6 +66,8 @@ export default {
 			}
 
 			this.isLoading = true;
+			//emitting loading event to parent
+			this.$emit('image-loading', this.isLoading);
 			// changing the filename, removing any hyphens
 			const filename = file.name.replace(/-/, '').split('.').slice(0, -1).join('.') + Date.now();
 			const options = {
@@ -104,10 +106,16 @@ export default {
 				this.$refs.inputMessage.innerText = 'File size is too big!';
 				return;
 			}
+
+			//setting the uploaded image to show on the input
 			this.imageUploaded = cloudinaryResponse.public_id;
 			this.$refs.inputName.innerText = file.name;
+			//sending the id to the parent payload
 			this.$emit('file-uploaded', cloudinaryResponse.public_id);
+			//ending the spinner
 			this.isLoading = false;
+			//emitting finished loading event to parent
+			this.$emit('image-loading', this.isLoading);
 		},
 	},
 	data() {

@@ -206,10 +206,22 @@
 						</div>
 						<div class="mt-6">
 							<div class="flex flex-wrap gap-y-6 gap-x-4">
-								<ImageUploader @file-uploaded="imageUpdated($event, 0)" />
-								<ImageUploader @file-uploaded="imageUpdated($event, 1)" />
-								<ImageUploader @file-uploaded="imageUpdated($event, 2)" />
-								<ImageUploader @file-uploaded="imageUpdated($event, 3)" />
+								<ImageUploader
+									@image-loading="isLoading = $event"
+									@file-uploaded="imageUpdated($event, 0)"
+								/>
+								<ImageUploader
+									@image-loading="isLoading = $event"
+									@file-uploaded="imageUpdated($event, 1)"
+								/>
+								<ImageUploader
+									@image-loading="isLoading = $event"
+									@file-uploaded="imageUpdated($event, 2)"
+								/>
+								<ImageUploader
+									@image-loading="isLoading = $event"
+									@file-uploaded="imageUpdated($event, 3)"
+								/>
 							</div>
 						</div>
 					</div>
@@ -253,6 +265,7 @@
 					<div class="flex justify-end">
 						<button
 							type="submit"
+							:disabled="isLoading"
 							class="w-22 h-9 inline-flex items-center justify-center border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-dodger-blue hover:bg-polo-blue focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
 						>
 							<LoadingSpinner v-if="isLoading" size="20px" />
