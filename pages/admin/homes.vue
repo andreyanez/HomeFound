@@ -204,8 +204,8 @@
 							<h3 class="text-lg leading-6 font-medium text-gray-900">Images</h3>
 							<p class="mt-1 text-sm text-gray-500">Add up to 4 images total.</p>
 						</div>
-						<div class="mt-6 gap-y-6 gap-x-4">
-							<div class="flex flex-wrap">
+						<div class="mt-6">
+							<div class="flex flex-wrap gap-y-6 gap-x-4">
 								<ImageUploader @file-uploaded="imageUpdated($event, 0)" />
 								<ImageUploader @file-uploaded="imageUpdated($event, 1)" />
 								<ImageUploader @file-uploaded="imageUpdated($event, 2)" />
