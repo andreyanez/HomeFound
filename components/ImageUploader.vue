@@ -14,9 +14,10 @@
 		</div>
 	</div> -->
 	<div
-		class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md"
+		class="mt-1 flex justify-center items-center px-6 pt-5 pb-6 border-2 w-44 border-gray-300 border-dashed rounded-md"
 	>
-		<div class="space-y-1 text-center">
+		<LoadingSpinner v-if="isLoading" size="40px" />
+		<div class="space-y-1 text-center" v-show="!isLoading">
 			<svg
 				class="mx-auto h-12 w-12 text-gray-400"
 				stroke="currentColor"
@@ -33,13 +34,11 @@
 			</svg>
 			<div class="flex justify-center text-sm text-gray-600">
 				<label
-					for="file-upload"
 					class="relative cursor-pointer font-medium text-polo-blue hover:text-mineshaft focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-mineshaft"
 				>
 					<span ref="inputName">Upload a file</span>
 					<input
 						id="file-upload"
-						name="file-upload"
 						ref="imageUploadInput"
 						type="file"
 						class="sr-only"
@@ -67,10 +66,11 @@ export default {
 				this.$refs.inputMessage.innerText = 'File size is too big!';
 				setTimeout(() => {
 					this.$refs.inputMessage.innerText = 'PNG, JPG up to 10MB';
-				}, 8000);
+				}, 6000);
 				return;
 			}
 
+			this.isLoading = true;
 			// changing the filename, removing any hyphens
 			const filename = file.name.replace(/-/, '').split('.').slice(0, -1).join('.') + Date.now();
 			const options = {
@@ -111,7 +111,13 @@ export default {
 			}
 			this.$refs.inputName.innerText = file.name;
 			this.$emit('file-uploaded', cloudinaryResponse.public_id);
+			this.isLoading = false;
 		},
+	},
+	data() {
+		return {
+			isLoading: false,
+		};
 	},
 };
 </script>
