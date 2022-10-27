@@ -346,9 +346,14 @@ export default {
 		async onSubmit() {
 			this.isLoading = true;
 
+			//In case user uploads images skipping inputs
+			//This filters only the not null values and sends them
+			const newArray = this.home.images.filter(n => n);
+			this.home.images = newArray;
+
 			// unwraping the response on a variable
-			//to be able to update the homeslist once a new
-			//home is added
+			// to be able to update the homeslist once a new
+			// home is added
 			const response = await unWrap(
 				await fetch('/api/homes', {
 					method: 'POST',

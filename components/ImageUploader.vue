@@ -1,18 +1,4 @@
 <template>
-	<!-- <div class="mt-1 p-6 border-2 border-gray-300 border-dashed rounded-md w-fit">
-		<div class="space-y-1 text-center block">
-			<div class="flex text-sm text-gray-600">
-				<input
-					id="file-upload"
-					type="file"
-					accept="image/jpg"
-					name="imageUploader"
-					ref="imageUploadInput"
-					@change="uploaded"
-				/>
-			</div>
-		</div>
-	</div> -->
 	<div
 		class="mt-1 flex justify-center items-center px-6 pt-5 pb-6 border-2 w-44 border-gray-300 border-dashed rounded-md"
 	>
@@ -24,6 +10,7 @@
 				fill="none"
 				viewBox="0 0 48 48"
 				aria-hidden="true"
+				v-if="!imageUploaded"
 			>
 				<path
 					d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
@@ -32,6 +19,14 @@
 					stroke-linejoin="round"
 				/>
 			</svg>
+			<nuxt-img
+				v-else
+				class="my-6 mx-auto"
+				provider="cloudinary"
+				width="50"
+				height="50"
+				:src="imageUploaded"
+			/>
 			<div class="flex justify-center text-sm text-gray-600">
 				<label
 					class="relative cursor-pointer font-medium text-polo-blue hover:text-mineshaft focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-mineshaft"
@@ -109,6 +104,7 @@ export default {
 				this.$refs.inputMessage.innerText = 'File size is too big!';
 				return;
 			}
+			this.imageUploaded = cloudinaryResponse.public_id;
 			this.$refs.inputName.innerText = file.name;
 			this.$emit('file-uploaded', cloudinaryResponse.public_id);
 			this.isLoading = false;
@@ -117,6 +113,7 @@ export default {
 	data() {
 		return {
 			isLoading: false,
+			imageUploaded: '',
 		};
 	},
 };
