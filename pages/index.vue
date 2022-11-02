@@ -71,7 +71,7 @@
 export default {
 	head() {
 		return {
-			title: 'Airbnb_Clone',
+			title: 'HomeFound',
 			meta: [
 				{
 					name: 'description',
