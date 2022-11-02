@@ -21,7 +21,7 @@ export default apis => {
 		//if there' no user registerd on algolia
 		//we fire createUser with the identity object
 		//which has our data
-		apis.user.create(identity, payload);
+		await apis.user.create(identity, payload);
 		//then we send back the data to the client
 		//using makeUserPayload, which jsuts
 		//creates an object to be sent as payload

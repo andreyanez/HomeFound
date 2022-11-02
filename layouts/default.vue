@@ -33,26 +33,7 @@
 				</button>
 			</div>
 			<div class="app-user-menu">
-				<template v-if="isLoggedIn">
-					<div class="name">Hello, {{ user.fullName }}</div>
-					<img :src="user.profileUrl" class="avatar" />
-				</template>
-				<div v-show="!isLoggedIn" id="googleButton" class="ml-8">
-					<div
-						id="g_id_onload"
-						:data-client_id="$config.auth.clientId"
-						data-auto_select="true"
-						data-callback="auth"
-					></div>
-					<div
-						class="g_id_signin"
-						data-type="icon"
-						data-shape="circle"
-						data-theme="outline"
-						data-text="signin_with"
-						data-size="large"
-					></div>
-				</div>
+				<UserLog />
 			</div>
 		</header>
 		<nuxt />
@@ -105,16 +86,6 @@ export default {
 	mounted() {
 		this.$maps.makeAutoComplete(this.$refs.citySearch);
 		window.addEventListener('scroll', this.scrollHeader);
-	},
-	// Created these computed methods to expose the user data
-	// and to condition rendering based on if user is logged in
-	computed: {
-		user() {
-			return this.$store.state.auth.user;
-		},
-		isLoggedIn() {
-			return this.$store.state.auth.isLoggedIn;
-		},
 	},
 	methods: {
 		//this will fire when the seach button is clicked

@@ -28,5 +28,8 @@
   },
   "ShortText": {
     "description": "Auto imported from components/ShortText.vue"
+  },
+  "UserLog": {
+    "description": "Auto imported from components/UserLog.vue"
   }
 }

@@ -8,6 +8,7 @@ export { default as PropertyHost } from '../../components/PropertyHost.vue'
 export { default as PropertyMap } from '../../components/PropertyMap.vue'
 export { default as PropertyReviews } from '../../components/PropertyReviews.vue'
 export { default as ShortText } from '../../components/ShortText.vue'
+export { default as UserLog } from '../../components/UserLog.vue'
 
 // nuxt/nuxt.js#8607
 function wrapFunctional(options) {

@@ -1,10 +1,11 @@
 import cookie from 'cookie';
-import { OAuth2Client } from 'google-auth-library';
+import { getApp, getApps, initializeApp } from 'firebase-admin/app';
+import { getAuth } from 'firebase-admin/auth';
 
 export default function () {
 	// we get the auth object we instanced on the runtime config
 	const authConfig = this.options.publicRuntimeConfig.auth;
-
+	const firebaseConfig = this.options.firebase.config;
 	//we use a nuxt server hook to setup middleware, and
 	//atach the handler function when we hit the /api route
 	this.nuxt.hook('render:setupMiddleware', app => {
@@ -27,43 +28,33 @@ export default function () {
 
 	//this handler function finds the cookie and parses it
 	//using the cookie library
-
 	async function handler(req, res, next) {
+		if (!req.headers.cookie) return rejectHit(res);
 		const idToken = cookie.parse(req.headers.cookie)[authConfig.cookieName];
-		//if the handler doesn't find any cookie stored, it will fire the rejectHit function
-		if (!idToken) return rejectHit(res);
-		//IG there's a token, we will fire the getUser function
-		//which usese the google auth library to verify the token
-		const ticket = await getUser(idToken);
-		//if the token wasn't vaild it won't return anything,
-		//so we'll fire rejectHit again.
-		if (!ticket) return rejectHit(res);
-		//else, we'll add a object to the request
-		//with basic data coming from the ticket
-		req.identity = {
-			id: ticket.sub,
-			email: ticket.email,
-			name: ticket.name,
-			image: ticket.picture,
-		};
+
+		const userIdentity = await getUser(idToken);
+
+		if (!userIdentity) return rejectHit(res);
+
+		req.identity = userIdentity;
 		next();
 	}
 
 	//the getUser function will validate the token given
 	// and it will return a payload, if successful
 	async function getUser(idToken) {
-		// initializing a OAuth instance and sending the client Id
-		//from the runtime config
-		const client = new OAuth2Client(authConfig.clientId);
+		const firebaseApp = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 		try {
-			// running the verifyIdToken fucntion from the oauth instance
-			// sending the idToken passed and the cliend Id
-			const ticket = await client.verifyIdToken({
-				idToken,
-				audience: authConfig.clientId,
-			});
-			//if successful, it will return the data from the getPayload function
-			return ticket.getPayload();
+			const ticket = await getAuth(firebaseApp).verifyIdToken(idToken);
+
+			const identity = {
+				id: ticket.uid,
+				email: ticket.email,
+				name: ticket.name,
+				image: ticket.picture,
+			};
+
+			return identity;
 		} catch (error) {
 			console.error(error);
 		}

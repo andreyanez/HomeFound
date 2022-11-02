@@ -16,3 +16,4 @@ You can directly use them in pages and other components without the need to impo
 - `<PropertyMap>` | `<property-map>` (components/PropertyMap.vue)
 - `<PropertyReviews>` | `<property-reviews>` (components/PropertyReviews.vue)
 - `<ShortText>` | `<short-text>` (components/ShortText.vue)
+- `<UserLog>` | `<user-log>` (components/UserLog.vue)

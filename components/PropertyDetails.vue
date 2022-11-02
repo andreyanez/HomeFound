@@ -80,7 +80,7 @@ export default {
 				return;
 			}
 			//checking if user is logged in before booking
-			if (!this.$store.state.auth.isLoggedIn) {
+			if (!this.$store.getters['isLoggedIn']) {
 				alert('You must sign in to book your stay');
 				return;
 			}

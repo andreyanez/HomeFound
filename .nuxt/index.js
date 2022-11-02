@@ -14,11 +14,12 @@ import { createStore } from './store.js'
 /* Plugins */
 
 import nuxt_plugin_plugin_7cb6c3e8 from 'nuxt_plugin_plugin_7cb6c3e8' // Source: ./components/plugin.js (mode: 'all')
+import nuxt_plugin_index_4d952a50 from 'nuxt_plugin_index_4d952a50' // Source: ./firebase/index.js (mode: 'all')
+import nuxt_plugin_serviceauthinitialize_55749fb6 from 'nuxt_plugin_serviceauthinitialize_55749fb6' // Source: ./firebase/service.auth.initialize.js (mode: 'all')
 import nuxt_plugin_pluginclient_3fabe256 from 'nuxt_plugin_pluginclient_3fabe256' // Source: ./cloudinary/plugin.client.js (mode: 'client')
 import nuxt_plugin_pluginserver_45e3805d from 'nuxt_plugin_pluginserver_45e3805d' // Source: ./cloudinary/plugin.server.js (mode: 'server')
 import nuxt_plugin_image_3f3887f9 from 'nuxt_plugin_image_3f3887f9' // Source: ./image.js (mode: 'all')
 import nuxt_plugin_maps_6ed989cc from 'nuxt_plugin_maps_6ed989cc' // Source: ../plugins/maps.client (mode: 'client')
-import nuxt_plugin_auth2_7e7ca5b6 from 'nuxt_plugin_auth2_7e7ca5b6' // Source: ../plugins/auth2.client (mode: 'client')
 import nuxt_plugin_dataApi_3cd42dda from 'nuxt_plugin_dataApi_3cd42dda' // Source: ../plugins/dataApi (mode: 'all')
 import nuxt_plugin_vCalendar_7837889b from 'nuxt_plugin_vCalendar_7837889b' // Source: ../plugins/vCalendar.client (mode: 'client')
 import nuxt_plugin_stripe_16926cd6 from 'nuxt_plugin_stripe_16926cd6' // Source: ../plugins/stripe.client (mode: 'client')
@@ -222,6 +223,14 @@ async function createApp(ssrContext, config = {}) {
     await nuxt_plugin_plugin_7cb6c3e8(app.context, inject)
   }
 
+  if (typeof nuxt_plugin_index_4d952a50 === 'function') {
+    await nuxt_plugin_index_4d952a50(app.context, inject)
+  }
+
+  if (typeof nuxt_plugin_serviceauthinitialize_55749fb6 === 'function') {
+    await nuxt_plugin_serviceauthinitialize_55749fb6(app.context, inject)
+  }
+
   if (process.client && typeof nuxt_plugin_pluginclient_3fabe256 === 'function') {
     await nuxt_plugin_pluginclient_3fabe256(app.context, inject)
   }
@@ -236,10 +245,6 @@ async function createApp(ssrContext, config = {}) {
 
   if (process.client && typeof nuxt_plugin_maps_6ed989cc === 'function') {
     await nuxt_plugin_maps_6ed989cc(app.context, inject)
-  }
-
-  if (process.client && typeof nuxt_plugin_auth2_7e7ca5b6 === 'function') {
-    await nuxt_plugin_auth2_7e7ca5b6(app.context, inject)
   }
 
   if (typeof nuxt_plugin_dataApi_3cd42dda === 'function') {
