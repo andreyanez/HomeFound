@@ -2,7 +2,7 @@
 	<div class="app bg-gray-100">
 		<header class="app-header fixed top-0 w-full z-20 bg-gray-100" id="header">
 			<nuxt-link to="/" class="app-logo">
-				<img src="/company_logo.svg" alt="airbnb_clone" width="150" />
+				<img src="/company_logo.svg" alt="HomeFound" width="150" />
 			</nuxt-link>
 			<div class="app-search">
 				<input type="text" ref="citySearch" @changed="changed" placeholder="Enter your address" />
@@ -40,7 +40,7 @@
 		<footer class="bg-white">
 			<div class="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
 				<nuxt-link to="/" class="mb-10 block">
-					<img src="/company_logo.svg" alt="airbnb_clone" width="150" class="mx-auto" />
+					<img src="/company_logo.svg" alt="HomeFound" width="150" class="mx-auto" />
 				</nuxt-link>
 				<nav class="-mx-5 -my-2 flex flex-wrap justify-center" aria-label="Footer">
 					<div class="px-5 py-2">

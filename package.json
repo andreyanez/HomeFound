@@ -1,6 +1,6 @@
 {
-	"name": "airbnb_clone",
-	"version": "1.0.0",
+	"name": "HomeFound",
+	"version": "1.5.0",
 	"description": "",
 	"dependencies": {
 		"@nuxtjs/cloudinary": "^1.0.3",

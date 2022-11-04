@@ -75,7 +75,7 @@ export default {
 			meta: [
 				{
 					name: 'description',
-					content: 'Airbnb clone made in Nuxt!',
+					content: 'Find and Register Homes all over the world!',
 					hid: 'description',
 				},
 			],
