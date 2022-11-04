@@ -1,10 +1,11 @@
-# Airbnb Clone
+![logo_2_75](https://user-images.githubusercontent.com/39743205/200044120-f581dd73-9a7f-49a5-b10b-4c8c161b82ba.png)
 
-Airbnb Clone made with the Nuxt.js framework. Find properties to book or register your own!
+Find properties to book or register your own!
+Made with the Nuxt.js framework.
 
-![websitepic](https://user-images.githubusercontent.com/39743205/197367955-a5797b77-f7dd-4d92-b026-a8a820409614.PNG)
+![websitepic](https://user-images.githubusercontent.com/39743205/200044390-b482ef3d-0517-47fe-90e8-7e82f49f7542.PNG)
 
-- [Live Site](https://nuxtairbnbclone.vercel.app/)
+- [Live Site](https://homefound.vercel.app/)
 
 ### 💰 Test Payment with Stripe
 
@@ -32,7 +33,7 @@ You can use this info for stripe checkout page.
 
 There is definetly much more to optimize for better user experience. 
 Among these optimizations are:
-- A sign out button
+- <s>A sign out button</s> Done!
 - Profile dashboard
 - Animation
 - Propery booking block after someone books one
