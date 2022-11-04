@@ -76,7 +76,7 @@ export default {
 	publicRuntimeConfig: {
 		rootUrl:
 			process.env.NODE_ENV === 'production'
-				? 'https://nuxtairbnbclone.vercel.app'
+				? 'https://homefound.vercel.app/'
 				: 'http://localhost:3000',
 		algolia: {
 			algolia_app_id: process.env.ALGOLIA_APP_ID,
