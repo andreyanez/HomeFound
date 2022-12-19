@@ -5,7 +5,7 @@ Made with the Nuxt.js framework.
 
 ![websitepic](https://user-images.githubusercontent.com/39743205/200044390-b482ef3d-0517-47fe-90e8-7e82f49f7542.PNG)
 
-- [Live Site](https://homefound.vercel.app/)
+- [Live Site / Sitio web](https://homefound.vercel.app/)
 
 ### 💰 Test Payment with Stripe
 
